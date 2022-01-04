@@ -1,4 +1,5 @@
 #include "MY_CLOUD_CONTROL.h"
+#include "FPS_Calculate.h"
 
 
 void cloud_control(void)
@@ -71,8 +72,10 @@ void YAW_PID()
 				}
 				else//视觉控制
 				{
-					yaw_trage_angle=DJIC_IMU.total_yaw;
-					
+				if(FPS_ALL.Vision.FPS>20&&VisionData.RawData.Armour == 1)	
+										{
+											yaw_trage_angle=DJIC_IMU.total_yaw;
+
 P_PID_bate(&Yaw_EM_Angle_pid, VisionData.RawData.Yaw_Angle,DJIC_IMU.total_yaw);//GM6020s[EMID].totalAngle readAngle
 
 					yaw_trage_speed=Yaw_EM_Angle_pid.result;//外环的结果给内环  二选一
@@ -80,7 +83,17 @@ P_PID_bate(&Yaw_EM_Angle_pid, VisionData.RawData.Yaw_Angle,DJIC_IMU.total_yaw);/
 P_PID_bate(&Yaw_EM_Speed_pid, yaw_trage_speed,DJIC_IMU.Gyro_z);
 					
 					send_to_yaw=Yaw_EM_Speed_pid.result;
-
+										}
+				else
+				{
+					P_PID_bate(&Yaw_IMU_Angle_pid, yaw_trage_angle,DJIC_IMU.total_yaw);//GM6020s[EMID].totalAngle readAngle
+					yaw_trage_speed=Yaw_IMU_Angle_pid.result;//外环的结果给内环  二选一
+//					yaw_trage_speed=(DR16.rc.ch3*1.0/660.0)*10000;//遥控器给速度目标值 二选一
+					P_PID_bate(&Yaw_IMU_Speed_pid, yaw_trage_speed,DJIC_IMU.Gyro_z);
+		                   send_to_yaw=Yaw_IMU_Speed_pid.result;
+					
+				}
+				
 				}
 #endif	
 

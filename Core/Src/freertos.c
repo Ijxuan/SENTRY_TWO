@@ -448,7 +448,7 @@ I_PID_Parameter_Init(&Driver_I_PID, 13, 0.3, 1,
                           10000, -10000);//摩擦轮电机
 						  
 /////////////////////////////////////////////////////////////////////自瞄YAW轴
-P_PID_Parameter_Init(&Yaw_EM_Angle_pid,2, 0, 0,
+P_PID_Parameter_Init(&Yaw_EM_Angle_pid,0.2, 0, 0,
 					0,//误差大于这个值就积分分离
 					//	float max_error, float min_error,
 					//                          float alpha,
@@ -497,6 +497,10 @@ HAL_Delay(100);
 							  	  	  HAL_Delay(100);
 if(DJIC_IMU.pitch>50&&DJIC_IMU.pitch_turnCounts==0)
 	DJIC_IMU.pitch_turnCounts=-1;
+
+
+							imu_angle();//去仿真做测试！！！  已做
+PITCH_trage_angle=PITCH_MIN_angle+30;
 	task_init_times++;
 						CHASSIS_trage_angle=990000;
 
