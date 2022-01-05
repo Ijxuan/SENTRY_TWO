@@ -44,6 +44,7 @@
  *----------------------------------------------------------*/
 
 /* USER CODE BEGIN Includes */
+
 /* Section where include file can be added */
 /* USER CODE END Includes */
 
@@ -52,6 +53,7 @@
   #include <stdint.h>
   extern uint32_t SystemCoreClock;
 #endif
+
 #define configENABLE_FPU                         0
 #define configENABLE_MPU                         0
 
@@ -120,6 +122,20 @@ See http://www.FreeRTOS.org/RTOS-Cortex-M3-M4.html. */
 header file. */
 /* USER CODE BEGIN 1 */
 #define configASSERT( x ) if ((x) == 0) {taskDISABLE_INTERRUPTS(); for( ;; );}
+
+/***************************************************************************************************************/
+/*                                FreeRTOS与运行时间和任务状态收集有关的配置选项                                 */
+/***************************************************************************************************************/
+#define configGENERATE_RUN_TIME_STATS	        1                       //为1时启用运行时间统计功能
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()  ConfigureTimeForRunTimeStats()//定时器3提供时间统计的时基，频率为10K，即周期为100us
+#define portGET_RUN_TIME_COUNTER_VALUE()		FreeRTOSRunTimeTicks	//获取时间统计时间值
+
+#define configUSE_TRACE_FACILITY				1                       //为1启用可视化跟踪调试
+#define configUSE_STATS_FORMATTING_FUNCTIONS	1                       //与宏configUSE_TRACE_FACILITY同时为1时会编译下面3个函数
+                                                                        //prvWriteNameToBuffer(),vTaskList(),
+                                                                        //vTaskGetRunTimeStats()
+                                                                        
+
 /* USER CODE END 1 */
 
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS

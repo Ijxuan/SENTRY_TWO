@@ -42,6 +42,7 @@
 #include "Vision.h"
 #include "user_UART.h"
 #include "FPS_Calculate.h"
+//#include "task.h"
 
 /* USER CODE END Includes */
 
@@ -154,7 +155,13 @@ void MX_FREERTOS_Init(void) {
   Task_Can2_ReiveHandle = osThreadCreate(osThread(Task_Can2_Reive), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  /* add threads, ... */
+  /* add threads, ...
+defaultTask    	245		<1%
+Task_Robot_Cont	1580		1%
+Task_Can2_Reive	4325		4%   CAN2
+MYTask03       	7604		7%   CAN1
+myTask04       	1385		1%   DEBUG
+IDLE           	80866		81%  */
   /* USER CODE END RTOS_THREADS */
 
 }
@@ -283,6 +290,8 @@ void CAN1_recive(void const * argument)
 * @param argument: Not used
 * @retval None
 */
+char RunTimeInfo[400];		//保存任务运行时间信息
+
 /* USER CODE END Header_DeBug */
 void DeBug(void const * argument)
 {
@@ -292,11 +301,27 @@ void DeBug(void const * argument)
   {
 	  
 	  		  task_debug_times++;
-//			if(DR16.rc.s_right==3)	//是否上位机
-//	   NM_swj();
+			if(DR16.rc.s_right==3)	//是否上位机
 
-	  Update_Vision_SendData();
-    osDelay(5);
+//	  Update_Vision_SendData();
+	  {
+//	  	   NM_swj();
+
+//memset(RunTimeInfo,0,400);				//信息缓冲区清零
+			vTaskGetRunTimeStats(RunTimeInfo);		//获取任务运行时间信息
+		  HAL_UART_Transmit_DMA(&huart6, (uint8_t *)&RunTimeInfo, 400);	
+//	  HAL_UART_Transmit(&huart6, (uint8_t *)&RunTimeInfo, 400, 0xFFFF);	 
+//		  for (uint16_t i = 0; i < 400; i++)
+//	{
+//		while ((UART6->SR & 0X40) == 0);
+//		UART6->DR = RunTimeInfo[i];
+//	}
+	  }
+
+	  
+//			printf("任务名\t\t\t运行时间\t运行所占百分比\r\n");
+//			printf("%s\r\n",RunTimeInfo);
+    osDelay(20);
   }
   /* USER CODE END DeBug */
 }
@@ -504,8 +529,8 @@ PITCH_trage_angle=PITCH_MIN_angle+30;
 	task_init_times++;
 						CHASSIS_trage_angle=990000;
 
-		osThreadDef(Task_Robot_Control, Robot_Control, RobotCtrl_Priority, 0, RobotCtrl_Size);
-  RobotCtrl_Handle = osThreadCreate(osThread(Task_Robot_Control), NULL);
+		osThreadDef(Control, Robot_Control, RobotCtrl_Priority, 0, RobotCtrl_Size);
+  RobotCtrl_Handle = osThreadCreate(osThread(Control), NULL);
 
 //	taskEXIT_CRITICAL(); //退出临界区
 	

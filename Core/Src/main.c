@@ -137,7 +137,7 @@ float DEBUFF=0;
 int uart_8_times=0;
 
 
-
+int time_3_times=0;
 
 
 
@@ -182,6 +182,7 @@ int main(void)
   MX_RNG_Init();
   MX_TIM5_Init();
   MX_UART8_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
    usart1_dr16_init();
 
@@ -189,6 +190,9 @@ int main(void)
 //USART6->DR = '2'; 
     /*使能定时器1中断*/
     HAL_TIM_Base_Start_IT(&htim7);
+    HAL_TIM_Base_Start_IT(&htim3);
+	
+	
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

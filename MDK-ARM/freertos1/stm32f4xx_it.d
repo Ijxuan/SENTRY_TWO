@@ -53,3 +53,4 @@ freertos1\stm32f4xx_it.o: ..\add\Vision.h
 freertos1\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 freertos1\stm32f4xx_it.o: ../Core/Inc/usart.h
 freertos1\stm32f4xx_it.o: ..\Arithmetic\CRC.h
+freertos1\stm32f4xx_it.o: ..\add\timer.h

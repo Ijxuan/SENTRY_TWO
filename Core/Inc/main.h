@@ -113,6 +113,7 @@ extern int driver_targe_speed;//拨盘的目标速度
 
 extern int uart_8_times;
 
+extern int time_3_times;
 
 typedef struct
 {

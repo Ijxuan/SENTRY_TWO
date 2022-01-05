@@ -29,6 +29,7 @@
 #include "FreeRTOS.h"
 #include "DJI_C_IMU.h"
 #include "Vision.h"
+#include "timer.h"
 
 //#include "task.h"
 
@@ -67,6 +68,7 @@
 /* External variables --------------------------------------------------------*/
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
+extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim7;
 extern DMA_HandleTypeDef hdma_uart8_rx;
 extern DMA_HandleTypeDef hdma_usart1_rx;
@@ -256,6 +258,25 @@ void CAN1_RX0_IRQHandler(void)
 //					__HAL_CAN_CLEAR_FLAG(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
 
   /* USER CODE END CAN1_RX0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM3 global interrupt.
+  */
+void TIM3_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM3_IRQn 0 */
+//	if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET) //溢出中断
+//	{
+	time_3_times++;
+		FreeRTOSRunTimeTicks++;
+//	}
+//	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //清除中断标志位
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim3);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
+  /* USER CODE END TIM3_IRQn 1 */
 }
 
 /**
