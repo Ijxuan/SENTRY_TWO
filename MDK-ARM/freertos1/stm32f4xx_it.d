@@ -54,3 +54,15 @@ freertos1\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 freertos1\stm32f4xx_it.o: ../Core/Inc/usart.h
 freertos1\stm32f4xx_it.o: ..\Arithmetic\CRC.h
 freertos1\stm32f4xx_it.o: ..\add\timer.h
+freertos1\stm32f4xx_it.o: ..\Device\RM_JudgeSystem.h
+freertos1\stm32f4xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+freertos1\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+freertos1\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+freertos1\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+freertos1\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+freertos1\stm32f4xx_it.o: ../Core/Inc/dma.h
+freertos1\stm32f4xx_it.o: ../Core/Inc/rng.h
+freertos1\stm32f4xx_it.o: ../Core/Inc/tim.h
+freertos1\stm32f4xx_it.o: ../Core/Inc/gpio.h
+freertos1\stm32f4xx_it.o: ..\Arithmetic\my_positionPID_bate.h
+freertos1\stm32f4xx_it.o: ..\Arithmetic\FPS_Calculate.h

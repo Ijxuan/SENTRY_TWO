@@ -55,3 +55,17 @@ freertos1\dr16_recive.o: ..\Device\M3508.h
 freertos1\dr16_recive.o: ..\APP\MY_CHASSIS_CONTROL.h
 freertos1\dr16_recive.o: ..\Arithmetic\my_IncrementPID_bate.h
 freertos1\dr16_recive.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\Math.h
+freertos1\dr16_recive.o: ..\add\Vision.h
+freertos1\dr16_recive.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+freertos1\dr16_recive.o: ..\Arithmetic\CRC.h
+freertos1\dr16_recive.o: ..\Arithmetic\FPS_Calculate.h
+freertos1\dr16_recive.o: ..\Device\RM_JudgeSystem.h
+freertos1\dr16_recive.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+freertos1\dr16_recive.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+freertos1\dr16_recive.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+freertos1\dr16_recive.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+freertos1\dr16_recive.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+freertos1\dr16_recive.o: ../Core/Inc/dma.h
+freertos1\dr16_recive.o: ../Core/Inc/rng.h
+freertos1\dr16_recive.o: ../Core/Inc/tim.h
+freertos1\dr16_recive.o: ../Core/Inc/gpio.h

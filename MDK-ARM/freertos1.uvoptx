@@ -170,212 +170,152 @@
         <Ww>
           <count>0</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Yaw_IMU_Speed_pid,0x0A</ItemText>
+          <ItemText>PITCH_EM_Speed_pid</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Yaw_IMU_Angle_pid,0x0A</ItemText>
+          <ItemText>PITCH_trage_angle</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>2</WinNumber>
-          <ItemText>send_to_yaw,0x0A</ItemText>
+          <ItemText>PITCH_EM_Angle_pid</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>2</WinNumber>
-          <ItemText>YAW_IMU_Kp,0x0A</ItemText>
+          <ItemText>VisionData.RawData.Pitch_Angle</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>2</WinNumber>
-          <ItemText>yaw_trage_speed,0x0A</ItemText>
+          <ItemText>DJIC_IMU.total_pitch</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>2</WinNumber>
-          <ItemText>yaw_trage_angle2,0x0A</ItemText>
+          <ItemText>Vision_RawData_Pitch_Angle</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>2</WinNumber>
-          <ItemText>DR16,0x0A</ItemText>
+          <ItemText>send_to_pitch,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>2</WinNumber>
-          <ItemText>yaw_trage_angle,0x0A</ItemText>
+          <ItemText>PITCH_MAX_angle</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>2</WinNumber>
-          <ItemText>PITCH_Angle_pid</ItemText>
+          <ItemText>DJIC_IMU.total_pitch</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>2</WinNumber>
-          <ItemText>PITCH_Speed_pid</ItemText>
+          <ItemText>PITCH_MIN_angle</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>2</WinNumber>
-          <ItemText>GM6020s,0x0A</ItemText>
+          <ItemText>PITCH_trage_angle</ItemText>
         </Ww>
         <Ww>
           <count>11</count>
           <WinNumber>2</WinNumber>
-          <ItemText>PITCH_MAX_angle,0x0A</ItemText>
+          <ItemText>Vision_RawData_Pitch_Angle</ItemText>
         </Ww>
         <Ww>
           <count>12</count>
           <WinNumber>2</WinNumber>
-          <ItemText>PITCH_MIN_angle,0x0A</ItemText>
+          <ItemText>\\freertos1\../Arithmetic/FPS_Calculate.c\FPS_ALL.Vision</ItemText>
         </Ww>
         <Ww>
           <count>13</count>
           <WinNumber>2</WinNumber>
-          <ItemText>DJIC_IMU,0x0A</ItemText>
+          <ItemText>Vision_RawData_Yaw_Angle</ItemText>
         </Ww>
         <Ww>
           <count>14</count>
           <WinNumber>2</WinNumber>
-          <ItemText>PITCH_trage_angle,0x0A</ItemText>
+          <ItemText>DJIC_IMU.total_yaw</ItemText>
         </Ww>
         <Ww>
           <count>15</count>
           <WinNumber>2</WinNumber>
-          <ItemText>PITCH_IMU_Speed_pid</ItemText>
+          <ItemText>VisionData.RawData.Yaw_Angle</ItemText>
         </Ww>
         <Ww>
           <count>16</count>
           <WinNumber>2</WinNumber>
-          <ItemText>PITCH_IMU_Angle_pid</ItemText>
+          <ItemText>Vision_RawData_Yaw_Angle</ItemText>
         </Ww>
         <Ww>
           <count>17</count>
           <WinNumber>2</WinNumber>
-          <ItemText>CHASSIS_trage_speed,0x0A</ItemText>
+          <ItemText>VisionData.RawData.Armour,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>18</count>
           <WinNumber>2</WinNumber>
-          <ItemText>M3508s,0x0A</ItemText>
+          <ItemText>Yaw_EM_Angle_pid</ItemText>
         </Ww>
         <Ww>
           <count>19</count>
           <WinNumber>2</WinNumber>
-          <ItemText>CHASSIS_MOTOR_SPEED_pid</ItemText>
+          <ItemText>Yaw_EM_Speed_pid</ItemText>
         </Ww>
         <Ww>
           <count>20</count>
           <WinNumber>2</WinNumber>
-          <ItemText>CHASSIS_MAX_SPEED,0x0A</ItemText>
+          <ItemText>EM_Ramp,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>21</count>
           <WinNumber>2</WinNumber>
-          <ItemText>M_3508_error,0x0A</ItemText>
+          <ItemText>yaw_trage_angle2,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>22</count>
           <WinNumber>2</WinNumber>
-          <ItemText>CHASSIS_MOTOR_ANGLE_pid,0x0A</ItemText>
+          <ItemText>yaw_trage_angle2</ItemText>
         </Ww>
         <Ww>
           <count>23</count>
           <WinNumber>2</WinNumber>
-          <ItemText>send_to_SHOOT_R,0x0A</ItemText>
+          <ItemText>FPS_ALL,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>24</count>
           <WinNumber>2</WinNumber>
-          <ItemText>send_to_SHOOT_L,0x0A</ItemText>
+          <ItemText>Judge_Monitor,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>25</count>
           <WinNumber>2</WinNumber>
-          <ItemText>SHOOT_L,0x0A</ItemText>
+          <ItemText>ext_power_heat_data,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>26</count>
           <WinNumber>2</WinNumber>
-          <ItemText>SHOOT_L_I_PID</ItemText>
+          <ItemText>Yaw_IMU_Angle_pid</ItemText>
         </Ww>
         <Ww>
           <count>27</count>
           <WinNumber>2</WinNumber>
-          <ItemText>CHASSIS_L_MAX_new,0x0A</ItemText>
+          <ItemText>Yaw_IMU_Angle_pid</ItemText>
         </Ww>
         <Ww>
           <count>28</count>
           <WinNumber>2</WinNumber>
-          <ItemText>CHASSIS_R_MIN_new,0x0A</ItemText>
+          <ItemText>DJIC_IMU,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>29</count>
           <WinNumber>2</WinNumber>
-          <ItemText>HWswitch_L,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>30</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>HWswitch_L_last,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>31</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>M2006_RxMessageData,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>32</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>Driver_I_PID</ItemText>
-        </Ww>
-        <Ww>
-          <count>33</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>Vision_Cloud,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>34</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>Vision_DataBuff</ItemText>
-        </Ww>
-        <Ww>
-          <count>35</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>uart_8_times,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>36</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>EM_R</ItemText>
-        </Ww>
-        <Ww>
-          <count>37</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>VisionData</ItemText>
-        </Ww>
-        <Ww>
-          <count>38</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>Yaw_EM_Angle_pid</ItemText>
-        </Ww>
-        <Ww>
-          <count>39</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>FPS_ALL,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>40</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>Yaw_EM_Speed_pid</ItemText>
-        </Ww>
-        <Ww>
-          <count>41</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>FreeRTOSRunTimeTicks</ItemText>
+          <ItemText>PITCH_IMU_Angle_pid</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>
@@ -1120,6 +1060,18 @@
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>54</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\Device\RM_JudgeSystem.c</PathWithFileName>
+      <FilenameWithoutPath>RM_JudgeSystem.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
   </Group>
 
   <Group>
@@ -1130,7 +1082,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>54</FileNumber>
+      <FileNumber>55</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1142,7 +1094,7 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>55</FileNumber>
+      <FileNumber>56</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1154,7 +1106,7 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>56</FileNumber>
+      <FileNumber>57</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1166,13 +1118,25 @@
     </File>
     <File>
       <GroupNumber>8</GroupNumber>
-      <FileNumber>57</FileNumber>
+      <FileNumber>58</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\Arithmetic\FPS_Calculate.c</PathWithFileName>
       <FilenameWithoutPath>FPS_Calculate.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>8</GroupNumber>
+      <FileNumber>59</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\Arithmetic\User_math.c</PathWithFileName>
+      <FilenameWithoutPath>User_math.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1186,7 +1150,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>9</GroupNumber>
-      <FileNumber>58</FileNumber>
+      <FileNumber>60</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1206,7 +1170,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>10</GroupNumber>
-      <FileNumber>59</FileNumber>
+      <FileNumber>61</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>

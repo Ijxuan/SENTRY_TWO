@@ -56,3 +56,4 @@ freertos1\main.o: ../Core/Inc/usart.h
 freertos1\main.o: ../Core/Inc/gpio.h
 freertos1\main.o: ..\add\DR16_RECIVE.h
 freertos1\main.o: ..\Arithmetic\my_positionPID_bate.h
+freertos1\main.o: ..\Arithmetic\FPS_Calculate.h

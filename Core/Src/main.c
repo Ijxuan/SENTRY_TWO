@@ -31,6 +31,7 @@
 /* USER CODE BEGIN Includes */
 #include "DR16_RECIVE.h"
 #include "my_positionPID_bate.h"
+#include "FPS_Calculate.h"
 
 /* USER CODE END Includes */
 
@@ -82,10 +83,12 @@ uint32_t task_controul_times=0;//总控制任务运行次数
 int every_1s_times=0;//方便计算
 
 float yaw_trage_angle=0;
-int yaw_trage_angle2=800;
+float yaw_trage_angle2;
 
 float yaw_trage_speed=0;
 float PITCH_trage_angle=0;
+float PITCH_trage_angle_2=0;
+
 int PITCH_trage_speed=0;
 int CHASSIS_trage_speed=0;
 int CHASSIS_trage_angle=0;
@@ -93,7 +96,7 @@ int CHASSIS_trage_angle=0;
 float PITCH_MAX_angle=0;
 float PITCH_MIN_angle=0;
 
-int CHASSIS_MAX_SPEED=7000;
+int CHASSIS_MAX_SPEED=9000;
 
 int send_to_yaw=0;//发送给yaw轴的数据
 int send_to_pitch=0;//发送给pitch轴的数据
@@ -139,8 +142,8 @@ int uart_8_times=0;
 
 int time_3_times=0;
 
-
-
+float Vision_RawData_Yaw_Angle=0;
+float Vision_RawData_Pitch_Angle=0;
 
 //driver  plate
 /* USER CODE END 0 */
@@ -183,6 +186,7 @@ int main(void)
   MX_TIM5_Init();
   MX_UART8_Init();
   MX_TIM3_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
    usart1_dr16_init();
 

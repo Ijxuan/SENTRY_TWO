@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F427xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;        ../Drivers/STM32F4xx_HAL_Driver/Inc;        ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;        ../Middlewares/Third_Party/FreeRTOS/Source/include;        ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;        ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;        ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;        ../Drivers/CMSIS/Include;        ..\add;        ..\BSP;        ..\Device;        ..\Arithmetic;        ..\APP</IncludePath>
+              <IncludePath>../Core/Inc;         ../Drivers/STM32F4xx_HAL_Driver/Inc;         ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;         ../Middlewares/Third_Party/FreeRTOS/Source/include;         ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;         ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;         ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;         ../Drivers/CMSIS/Include;         ..\add;         ..\BSP;         ..\Device;         ..\Arithmetic;         ..\APP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -677,6 +677,11 @@
               <FileType>1</FileType>
               <FilePath>..\add\timer.c</FilePath>
             </File>
+            <File>
+              <FileName>RM_JudgeSystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Device\RM_JudgeSystem.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -701,6 +706,11 @@
               <FileName>FPS_Calculate.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Arithmetic\FPS_Calculate.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Arithmetic\User_math.c</FilePath>
             </File>
           </Files>
         </Group>

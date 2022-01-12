@@ -58,6 +58,12 @@ EM_R.step_1=1;
 	{
 		VisionData.RawData.Pitch_Angle *= -1.0f;
 	}
+//				//Yaw轴：单位 角度° 转成 机械角度(码盘值)
+			Vision_RawData_Yaw_Angle = (float)VisionData.RawData.Yaw_Angle / 100.0f;
+//			//Pitch轴：
+			Vision_RawData_Pitch_Angle = (float)VisionData.RawData.Pitch_Angle / 100.0f;
+
+	
 EM_R.step_2=1;	
 	//接收到错误的信息，则相当于无接收到消息，则无视觉作用
 	//脱离视野范围，是接收到正确的消息
@@ -229,10 +235,7 @@ void Update_Vision_SendData(void)
 		//Z的加速度
 		Vision_SendBuff[i][12] = Vision_Cloud.Gyro_z_Hight;
 		Vision_SendBuff[i][13] = Vision_Cloud.Gyro_z_low;
-		//Y的加速度
-		Vision_SendBuff[i][12] = Vision_Cloud.Gyro_z_Hight;
-		Vision_SendBuff[i][13] = Vision_Cloud.Gyro_z_low;		
-		
+		//Y的加速度		
 		Vision_SendBuff[i][14] = Vision_Cloud.Gyro_z_Hight;
 		Vision_SendBuff[i][15] = Vision_Cloud.Gyro_z_low;
 		//首支枪管的速度限制

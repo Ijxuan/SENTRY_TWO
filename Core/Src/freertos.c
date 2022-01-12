@@ -42,6 +42,9 @@
 #include "Vision.h"
 #include "user_UART.h"
 #include "FPS_Calculate.h"
+#include "User_math.h"
+#include "RM_JudgeSystem.h"
+
 //#include "task.h"
 
 /* USER CODE END Includes */
@@ -291,7 +294,7 @@ void CAN1_recive(void const * argument)
 * @retval None
 */
 char RunTimeInfo[400];		//保存任务运行时间信息
-
+uint16_t times_i;
 /* USER CODE END Header_DeBug */
 void DeBug(void const * argument)
 {
@@ -301,27 +304,42 @@ void DeBug(void const * argument)
   {
 	  
 	  		  task_debug_times++;
+	  
+	  Update_Vision_SendData();
+
 			if(DR16.rc.s_right==3)	//是否上位机
-
-//	  Update_Vision_SendData();
-	  {
-//	  	   NM_swj();
-
-//memset(RunTimeInfo,0,400);				//信息缓冲区清零
+	  {		  
+	 
+			times_i++;
+		  if(times_i>4)//5ms发一次
+		  {
+	  	   NM_swj();
+			times_i=0;  
+			  
+		  }
+		  
+	  }
+		  /*
+		//memset(RunTimeInfo,0,400);				//信息缓冲区清零
+  
+		  
 			vTaskGetRunTimeStats(RunTimeInfo);		//获取任务运行时间信息
 		  HAL_UART_Transmit_DMA(&huart6, (uint8_t *)&RunTimeInfo, 400);	
+		  
+		  
+		  */
 //	  HAL_UART_Transmit(&huart6, (uint8_t *)&RunTimeInfo, 400, 0xFFFF);	 
 //		  for (uint16_t i = 0; i < 400; i++)
 //	{
 //		while ((UART6->SR & 0X40) == 0);
 //		UART6->DR = RunTimeInfo[i];
 //	}
-	  }
+
 
 	  
 //			printf("任务名\t\t\t运行时间\t运行所占百分比\r\n");
 //			printf("%s\r\n",RunTimeInfo);
-    osDelay(20);
+    osDelay(1);
   }
   /* USER CODE END DeBug */
 }
@@ -357,7 +375,12 @@ void init_task(void const * argument)
 
 	USART_RX_DMA_ENABLE(&huart8, Vision_DataBuff, Vision_BuffSize);
 	
-	
+		//裁判系统
+	__HAL_UART_CLEAR_IDLEFLAG(&huart3);
+
+	__HAL_UART_ENABLE_IT(&huart3, UART_IT_IDLE);
+
+	USART_RX_DMA_ENABLE(&huart3, JudgeSystem_rxBuff, JUDGESYSTEM_PACKSIZE);	
 	
 	/*
 	CAN1_Filter0_Init();
@@ -473,35 +496,35 @@ I_PID_Parameter_Init(&Driver_I_PID, 13, 0.3, 1,
                           10000, -10000);//摩擦轮电机
 						  
 /////////////////////////////////////////////////////////////////////自瞄YAW轴
-P_PID_Parameter_Init(&Yaw_EM_Angle_pid,0.2, 0, 0,
+P_PID_Parameter_Init(&Yaw_EM_Angle_pid,0.14, 0, 0,
 					0,//误差大于这个值就积分分离
 					//	float max_error, float min_error,
 					//                          float alpha,
 					0, 0,//积分限幅，也就是积分的输出范围
-					25, -25);//YAW轴自瞄PID,慢慢来
+					240, -240);//YAW轴自瞄PID,慢慢来
 					
-P_PID_Parameter_Init(&Yaw_EM_Speed_pid,200, 3, 0,
+P_PID_Parameter_Init(&Yaw_EM_Speed_pid,500, 6, 0,
 					120,
 					//						  float max_error, float min_error,
 					//                          float alpha,
-					1000, -1000,
+					2000, -2000,
 					28000, -28000);//Yaw_IMU_Angle_pid	
 
 
 
 /////////////////////////////////////////////////////////////////////自瞄PITCH轴
-P_PID_Parameter_Init(&PITCH_EM_Speed_pid,200, 1, 0,
+P_PID_Parameter_Init(&PITCH_EM_Speed_pid,180, 1, 0,
 					120,//误差大于这个值就积分分离
 					//	float max_error, float min_error,
 					//                          float alpha,
 					5000, -5000,//积分限幅，也就是积分的输出范围
 					28000, -28000);
-P_PID_Parameter_Init(&PITCH_EM_Angle_pid,10, 0, 0,
+P_PID_Parameter_Init(&PITCH_EM_Angle_pid,0.8, 0, 0,
 					0,
 					//						  float max_error, float min_error,
 					//                          float alpha,
 					0, 0,
-					500, -500);//Yaw_IMU_Angle_pid	
+					80, -80);//Yaw_IMU_Angle_pid	
 
 
 
@@ -528,6 +551,10 @@ if(DJIC_IMU.pitch>50&&DJIC_IMU.pitch_turnCounts==0)
 PITCH_trage_angle=PITCH_MIN_angle+30;
 	task_init_times++;
 						CHASSIS_trage_angle=990000;
+
+	EM_Ramp->Rate=0.1;
+	EM_Ramp->Absolute_Max=50;
+
 
 		osThreadDef(Control, Robot_Control, RobotCtrl_Priority, 0, RobotCtrl_Size);
   RobotCtrl_Handle = osThreadCreate(osThread(Control), NULL);
@@ -622,13 +649,13 @@ void Robot_Control(void const *argument)
 					send_to_pitch=0;		
 			if(DR16.rc.s_left==2||DR16.rc.s_left==0)	//失能保护
 			{	
-				send_to_yaw=0;
 			send_to_pitch=0;
-		
+								send_to_yaw=0;
+
 				yaw_trage_angle=DJIC_IMU.total_yaw;
 				//还不够，使能瞬间会抖一下，应该还要清楚I的累加，以后有时间再写
 			}			
-		
+
 
 				GM6020_SetVoltage(send_to_yaw,send_to_pitch, 0, 0);//云台  send_to_pitch
 			Get_Encoder_Value(&Chassis_Encoder, &htim5);

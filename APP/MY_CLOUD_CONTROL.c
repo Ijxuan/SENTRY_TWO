@@ -1,14 +1,16 @@
 #include "MY_CLOUD_CONTROL.h"
 #include "FPS_Calculate.h"
 
+#include "User_math.h"
 
+Ramp_Struct *EM_Ramp;
 void cloud_control(void)
 {
 	
 								if(DR16.rc.s_left==1)//YAW轴控制挡位
 							{
 							yaw_trage_angle+=(DR16.rc.ch0/660.0)/-3;//YAW轴遥控器控制
-								PITCH_trage_angle+=(DR16.rc.ch1/660.0)/5;//pitch轴遥控器控制
+								PITCH_trage_angle+=(DR16.rc.ch1/660.0)*5;//pitch轴遥控器控制
 //							if(DR16.rc.ch4_DW<=-400)//拨上
 //							yaw_trage_angle=yaw_trage_angle2;//陀螺仪角速度最大为140
 							/*
@@ -29,19 +31,21 @@ void cloud_control(void)
 							
 							YAW_PID();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
-//							PITCH_trage_angle=0;//保持水平位置
-							imu_angle();//去仿真做测试！！！  已做
-							//陀螺仪零漂限幅
-						if(PITCH_trage_angle>PITCH_MAX_angle||PITCH_trage_angle==PITCH_MAX_angle)
-													PITCH_trage_angle=PITCH_MAX_angle;
-						if(PITCH_trage_angle<PITCH_MIN_angle||PITCH_trage_angle==PITCH_MIN_angle)
-													PITCH_trage_angle=PITCH_MIN_angle;	
+
 						
 							PITCH_PID();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
 void YAW_PID()
 {
+	//							PITCH_trage_angle=0;//保持水平位置
+
+	
+	
+	
+	
+	
+	
 						#if PID_MOTOR//YAW轴电机角度
 					P_PID_bate(&Yaw_Angle_pid, yaw_trage_angle,GM6020s[0].totalAngle);//GM6020s[EMID].totalAngle readAngle
 
@@ -75,8 +79,11 @@ void YAW_PID()
 				if(FPS_ALL.Vision.FPS>20&&VisionData.RawData.Armour == 1)	
 										{
 											yaw_trage_angle=DJIC_IMU.total_yaw;
-
-P_PID_bate(&Yaw_EM_Angle_pid, VisionData.RawData.Yaw_Angle,DJIC_IMU.total_yaw);//GM6020s[EMID].totalAngle readAngle
+//											EM_Ramp->Target_Value=VisionData.RawData.Yaw_Angle;
+//											EM_Ramp->Current_Value=DJIC_IMU.total_yaw;
+//											EM_Ramp->Absolute_Max=50;
+yaw_trage_angle2=+VisionData.RawData.Yaw_Angle;
+P_PID_bate(&Yaw_EM_Angle_pid, yaw_trage_angle2,DJIC_IMU.total_yaw);//GM6020s[EMID].totalAngle readAngle
 
 					yaw_trage_speed=Yaw_EM_Angle_pid.result;//外环的结果给内环  二选一
 					
@@ -103,6 +110,27 @@ P_PID_bate(&Yaw_EM_Speed_pid, yaw_trage_speed,DJIC_IMU.Gyro_z);
 
 void PITCH_PID()
 {
+												if(DR16.rc.s_right==3)	//是否陀螺仪
+				{		
+							if(FPS_ALL.Vision.FPS>20&&VisionData.RawData.Armour == 1)	
+							{
+								PITCH_trage_angle-=(Vision_RawData_Pitch_Angle/10.0);
+//							PITCH_trage_angle_2=;
+							}
+							else
+								PITCH_trage_angle =DJIC_IMU.total_pitch;
+				}			
+//							else
+//								PITCH_trage_angle =PITCH_trage_angle_2;
+							imu_angle();//去仿真做测试！！！  已做
+							//陀螺仪零漂限幅
+						if(PITCH_trage_angle>PITCH_MAX_angle||PITCH_trage_angle==PITCH_MAX_angle)
+													PITCH_trage_angle=PITCH_MAX_angle;
+						if(PITCH_trage_angle<PITCH_MIN_angle||PITCH_trage_angle==PITCH_MIN_angle)
+													PITCH_trage_angle=PITCH_MIN_angle;	
+	
+	
+	
 	#if PID_PITCH_MOTOR      //PITCH轴电机角度
 if(PITCH_trage_angle>7125)
 	PITCH_trage_angle=7125;
@@ -149,16 +177,37 @@ if(PITCH_trage_angle<6435)
 				}
 				else//视觉控制
 				{
-				
+								if(FPS_ALL.Vision.FPS>20&&VisionData.RawData.Armour == 1)	
+										{
 					
-P_PID_bate(&PITCH_EM_Angle_pid, VisionData.RawData.Pitch_Angle,DJIC_IMU.total_pitch);//GM6020s[EMID].totalAngle readAngle
+//P_PID_bate(&PITCH_EM_Angle_pid,PITCH_trage_angle ,DJIC_IMU.total_pitch);//GM6020s[EMID].totalAngle readAngle
 
-					PITCH_trage_speed=PITCH_EM_Angle_pid.result;//外环的结果给内环  二选一
+//					PITCH_trage_speed=PITCH_EM_Angle_pid.result;//外环的结果给内环  二选一
+//					
+//P_PID_bate(&PITCH_EM_Speed_pid, PITCH_trage_speed,DJIC_IMU.Gyro_y);
+//					
+//					send_to_pitch=PITCH_EM_Speed_pid.result;
+					P_PID_bate(&PITCH_IMU_Angle_pid, PITCH_trage_angle,DJIC_IMU.total_pitch);//GM6020s[EMID].totalAngle readAngle
+//陀螺仪的速度值会有小数
+					PITCH_trage_speed=PITCH_IMU_Angle_pid.result;//外环的结果给内环  二选一
+//					PITCH_trage_speed=(DR16.rc.ch3*1.0/660.0)*10000;//遥控器给速度目标值 二选一
+				
+				P_PID_bate(&PITCH_IMU_Speed_pid, PITCH_trage_speed,DJIC_IMU.Gyro_y);
+				send_to_pitch=PITCH_IMU_Speed_pid.result;//先去做实验
+										}
+				else
+				{
+					P_PID_bate(&PITCH_IMU_Angle_pid, PITCH_trage_angle,DJIC_IMU.total_pitch);//GM6020s[EMID].totalAngle readAngle
+//陀螺仪的速度值会有小数
+					PITCH_trage_speed=PITCH_IMU_Angle_pid.result;//外环的结果给内环  二选一
+//					PITCH_trage_speed=(DR16.rc.ch3*1.0/660.0)*10000;//遥控器给速度目标值 二选一
+				
+				P_PID_bate(&PITCH_IMU_Speed_pid, PITCH_trage_speed,DJIC_IMU.Gyro_y);
+				send_to_pitch=PITCH_IMU_Speed_pid.result;//先去做实验
 					
-P_PID_bate(&PITCH_EM_Speed_pid, PITCH_trage_speed,DJIC_IMU.Gyro_y);
-					
-					send_to_pitch=Yaw_EM_Speed_pid.result;
-					
+				}
+										
+										
 				}
 #endif	
 

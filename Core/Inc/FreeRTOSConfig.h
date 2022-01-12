@@ -53,7 +53,6 @@
   #include <stdint.h>
   extern uint32_t SystemCoreClock;
 #endif
-
 #define configENABLE_FPU                         0
 #define configENABLE_MPU                         0
 
@@ -126,6 +125,8 @@ header file. */
 /***************************************************************************************************************/
 /*                                FreeRTOS与运行时间和任务状态收集有关的配置选项                                 */
 /***************************************************************************************************************/
+/* 
+
 #define configGENERATE_RUN_TIME_STATS	        1                       //为1时启用运行时间统计功能
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()  ConfigureTimeForRunTimeStats()//定时器3提供时间统计的时基，频率为10K，即周期为100us
 #define portGET_RUN_TIME_COUNTER_VALUE()		FreeRTOSRunTimeTicks	//获取时间统计时间值
@@ -135,6 +136,10 @@ header file. */
                                                                         //prvWriteNameToBuffer(),vTaskList(),
                                                                         //vTaskGetRunTimeStats()
                                                                         
+*/
+
+
+
 
 /* USER CODE END 1 */
 

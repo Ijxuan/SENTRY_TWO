@@ -8,7 +8,9 @@
 #include "DJI_C_IMU.h"
 
 #include "Vision.h"
+#include "User_math.h"
 
+extern Ramp_Struct *EM_Ramp;
 
 
 void cloud_control(void);

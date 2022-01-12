@@ -8,6 +8,9 @@
 #include "M3508.h"
 #include "MY_CHASSIS_CONTROL.h"
 #include "my_IncrementPID_bate.h"
+#include "Vision.h"
+#include "FPS_Calculate.h"
+#include "RM_JudgeSystem.h"
 
 //#include "GM6020_Motor.h"
 //#include "control.h"
@@ -218,7 +221,54 @@ void NM_swj(void)
 	testdatatosend[_cnt++]=0xFF;
 	testdatatosend[_cnt++]=0xF1;
 	testdatatosend[_cnt++]=34;
+if(0)
+{
+	
+		#if 0//发送pitch云台数据
+//	testdatatosend[_cnt++]=0;
+//	
+//	testdatatosend[_cnt++]=BYTE0(mubiaosudu3);
+//			testdatatosend[_cnt++]=BYTE1(mubiaosudu3);
 
+//	testdatatosend[_cnt++]=BYTE0(my_6020array[1].realSpeed);
+//		testdatatosend[_cnt++]=BYTE1(my_6020array[1].realSpeed);
+	//位置环参数
+//	data1=send_to_yaw;
+//	data3=Yaw_Angle_pid.result;
+//	data3=yaw_trage_speed;
+//	data4=GM6020s[0].readSpeed;
+	p=0;
+
+//			send_d_32[p++]=Yaw_Angle_pid.Target;//目标角度		1
+//			send_d_32[p++]=Yaw_Angle_pid.Measure;//当前角度		2
+			send_d_32[p++]=PITCH_IMU_Angle_pid.Target;//目标角度		1
+			send_d_32[p++]=PITCH_IMU_Angle_pid.Measure;//当前角度		2
+
+			send_d_32[p++]=PITCH_IMU_Speed_pid.Target*10000;//P_OUT		3 
+			//DJIC_IMU.Gyro_y*1000000
+//DJIC_IMU.pitch
+			send_d_32[p++]= PITCH_IMU_Speed_pid.Measure*10000;//I_OUT 4		4PID_YES
+//			send_d_32[p++]=Yaw_Angle_pid.Integral;//I_OUT 4		4
+//			send_d_32[4]=Yaw_Angle_pid.Differential;//D_OUT		
+
+//			send_d_32[p++]=Yaw_Speed_pid.Proportion;//P_OUT		5
+//			send_d_32[p++]=Yaw_Speed_pid.I_Output;//I_OUT		6
+//			send_d_32[p++]=Yaw_Speed_pid.Differential;//D_OUT  	7
+//	p=0;
+//			send_d_16[p++]=Yaw_Speed_pid.result;//输出电压      8
+
+//			send_d_16[p++]=Yaw_Speed_pid.Target;//目标速度     	9
+//			send_d_16[p++]=Yaw_Speed_pid.Measure;//当前速度		10
+			send_d_32[p++]=PITCH_IMU_Speed_pid.Proportion;//P_OUT		5
+			send_d_32[p++]=PITCH_IMU_Speed_pid.I_Output;//I_OUT		6
+			send_d_32[p++]=PITCH_IMU_Speed_pid.Differential;//D_OUT  	7
+	p=0;
+			send_d_16[p++]=PITCH_IMU_Angle_pid.result;//输出电压      8
+
+			send_d_16[p++]=PITCH_IMU_Angle_pid.Target;//目标角度       	9
+			send_d_16[p++]=PITCH_IMU_Angle_pid.Measure;//当前角度		10
+														//保留到小数点后四位
+#endif
 	#if 0//发送云台数据
 //	testdatatosend[_cnt++]=0;
 //	
@@ -441,7 +491,7 @@ void NM_swj(void)
 
 #endif
 
-#if 1//发送拨盘数据
+#if 0//发送拨盘数据
 	p=0;
 			send_d_32[p++]=driver_targe_speed;//轨道左边界值		1
 			send_d_32[p++]=M3508s[2].realSpeed;//在轨位置		2
@@ -458,6 +508,72 @@ void NM_swj(void)
 
 			send_d_16[p++]=Driver_I_PID.Differential;//目标角度       	9
 			send_d_16[p++]=Driver_I_PID.result;//随机数		10
+
+#endif
+
+}
+
+#if 0//发送视觉数据
+	p=0;
+			send_d_32[p++]=DJIC_IMU.total_yaw			*100;//陀螺仪角度		1
+			send_d_32[p++]=VisionData.RawData.Yaw_Angle*100;//来自视觉的目标		2
+
+			send_d_32[p++]=yaw_trage_angle2		*100;//角度误差		3 
+
+			send_d_32[p++]=yaw_trage_speed;//目标速度 4		4PID_YES
+
+			send_d_32[p++]=Yaw_EM_Speed_pid.P_Output;//P_OUT		5
+			send_d_32[p++]=Yaw_EM_Speed_pid.I_Output;//I_OUT		6
+			send_d_32[p++]=Yaw_EM_Speed_pid.D_Output;//D_OUT  	7
+	p=0;
+			send_d_16[p++]=VisionData.RawData.Armour*1000;//输出电压      8
+
+			send_d_16[p++]=FPS_ALL.Vision.FPS;//fps       	9
+			send_d_16[p++]=send_to_yaw;			//随机数		发送给yaw轴电机
+
+#endif
+#if 0//发送视觉pitch数据
+	p=0;
+			send_d_32[p++]=DJIC_IMU.total_pitch			*1000;//陀螺仪角度		1
+			send_d_32[p++]=Vision_RawData_Pitch_Angle*1000;//来自视觉的目标		2
+
+			send_d_32[p++]=PITCH_trage_angle		*1000;//角度误差		3 
+
+			send_d_32[p++]=PITCH_trage_speed;//目标速度 4		4PID_YES
+
+			send_d_32[p++]=PITCH_EM_Speed_pid.Proportion;//P_OUT		5
+			send_d_32[p++]=PITCH_EM_Speed_pid.I_Output;//I_OUT		6
+			send_d_32[p++]=VisionData.RawData.Pitch_Dir;//D_OUT  	7
+	p=0;
+			send_d_16[p++]=PITCH_EM_Speed_pid.result;//输出电压      8
+
+			send_d_16[p++]=FPS_ALL.Vision.FPS;//fps       	9
+			send_d_16[p++]=send_to_pitch;			//随机数		发送给yaw轴电机
+
+#endif
+#if 1//发送底盘功率数据//底盘输出电压 单位 毫伏
+/*
+			uint16_t chassis_volt; //底盘输出电压 单位 毫伏
+      uint16_t chassis_current; //底盘输出电流 单位 毫安
+      float chassis_power;//底盘输出功率 单位 W 瓦
+      uint16_t chassis_power_buffer;//底盘功率缓冲 单位 J 焦耳 备注：飞坡根据规则增加至 250J
+	  */
+	p=0;
+			send_d_32[p++]=ext_power_heat_data.data.chassis_volt;//底盘输出电压 单位 毫伏
+			send_d_32[p++]=ext_power_heat_data.data.chassis_current;//底盘输出电流 单位 W 瓦    2
+
+			send_d_32[p++]=ext_power_heat_data.data.chassis_power*1000000;//底盘输出功率
+
+			send_d_32[p++]=ext_power_heat_data.data.chassis_power_buffer;//底盘功率缓冲 4		4PID_YES
+
+			send_d_32[p++]=PITCH_EM_Speed_pid.Proportion;//P_OUT		5
+			send_d_32[p++]=PITCH_EM_Speed_pid.I_Output;//I_OUT		6
+			send_d_32[p++]=VisionData.RawData.Pitch_Dir;//D_OUT  	7
+	p=0;
+			send_d_16[p++]=M3508s[3].realSpeed;//输出电压      8
+
+			send_d_16[p++]=M3508s[3].realCurrent;//fps       	9 				M3508s[3].
+			send_d_16[p++]=send_to_chassis;			//随机数		发送给yaw轴电机
 
 #endif
 

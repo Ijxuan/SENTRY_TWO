@@ -33,3 +33,7 @@ const float SHOOT_HIGH_SPEED = 6700.0f;
 与视觉通信用的是串口8   1ms发送一次
 
 波特率921600
+
+
+发送pitch轴数据
+检查pitch轴正负标记位

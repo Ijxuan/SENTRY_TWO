@@ -64,9 +64,11 @@ extern uint32_t task_controul_times;//总控制任务运行次数
 extern int every_1s_times;//方便计算
 
 extern float yaw_trage_angle;
-extern int yaw_trage_angle2;
+extern float yaw_trage_angle2;
 extern float yaw_trage_speed;
 extern float PITCH_trage_angle;
+extern float PITCH_trage_angle_2;
+
 extern int PITCH_trage_speed;
 
 extern int send_to_yaw;
@@ -115,6 +117,9 @@ extern int uart_8_times;
 
 extern int time_3_times;
 
+extern float Vision_RawData_Yaw_Angle;
+extern float Vision_RawData_Pitch_Angle;
+
 typedef struct
 {
 	bool step_1;
@@ -155,6 +160,10 @@ uint32_t MY_GetTick(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Judge_TX_Pin GPIO_PIN_8
+#define Judge_TX_GPIO_Port GPIOD
+#define Judge_RX_Pin GPIO_PIN_9
+#define Judge_RX_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

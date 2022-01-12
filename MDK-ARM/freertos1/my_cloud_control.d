@@ -55,4 +55,5 @@ freertos1\my_cloud_control.o: ..\add\Vision.h
 freertos1\my_cloud_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 freertos1\my_cloud_control.o: ../Core/Inc/usart.h
 freertos1\my_cloud_control.o: ..\Arithmetic\CRC.h
+freertos1\my_cloud_control.o: ..\Arithmetic\User_math.h
 freertos1\my_cloud_control.o: ..\Arithmetic\FPS_Calculate.h

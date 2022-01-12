@@ -52,10 +52,12 @@
 "freertos1\vision.o"
 "freertos1\user_uart.o"
 "freertos1\timer.o"
+"freertos1\rm_judgesystem.o"
 "freertos1\my_positionpid_bate.o"
 "freertos1\my_incrementpid_bate.o"
 "freertos1\crc.o"
 "freertos1\fps_calculate.o"
+"freertos1\user_math.o"
 "freertos1\dji_c_imu.o"
 --library_type=microlib --strict --scatter "freertos1\freertos1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
