@@ -4,6 +4,8 @@
 #include "Vision.h"
 #include "FPS_Calculate.h"
 
+DR16_R_FROM_C R16_from_C;
+
 //接收数据联合体
 DJI_C_Euler_u DJI_C_Euler_Receive;
 DJI_C_Gyro_u DJI_C_Gyro_Receive;
@@ -12,6 +14,25 @@ Frame_rate_t Euler_Framerate;
 Frame_rate_t Gyro_Framerate;
 //数据处理结构体
 DJIC_IMU_t DJIC_IMU;
+
+//解包DJI_C的DR16
+void DJI_C_DR16_getInfo(CAN_Rx_TypeDef CAN_Rx_Structure)
+{
+//	if (CAN_Rx_Structure.CAN_RxMessage.StdId != DR16_R_ID)
+//	{
+//		return;
+//	}
+	for (int i = 0; i < 8; i++)
+	{
+		R16_from_C.BraodData[i] = CAN_Rx_Structure.CAN_RxMessageData[i];
+	}
+//	//获取其帧率
+//	Get_FPS(&FPS_ALL.IMU_Gyro.WorldTimes, &FPS_ALL.IMU_Gyro.FPS);
+//		//离线检测
+//	Gyro_Framerate.Offline_Detec++;
+//	Gyro_Framerate.Offline_Flag = 0;
+}
+
 
 //处理更新数据
 void Updata_Hand_Euler_Gyro_Data(void)

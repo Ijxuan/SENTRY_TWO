@@ -313,7 +313,7 @@ void DeBug(void const * argument)
 			times_i++;
 		  if(times_i>4)//5ms发一次
 		  {
-	  	   NM_swj();
+//	  	   NM_swj();
 			times_i=0;  
 			  
 		  }
@@ -592,7 +592,7 @@ void Can2_Reive(void const * argument)
 	CAN_Rx_TypeDef CAN2_Rx_Structure;
 	//出队的状态变量
 	BaseType_t ExitQueue_Status;
-		task_can2_times++;
+//		task_can2_times++;
 
 	/* Infinite loop */
 	for (;;)
@@ -602,6 +602,11 @@ void Can2_Reive(void const * argument)
 		//出队成功
 		if (ExitQueue_Status == pdTRUE)
 		{
+			
+			if(CAN2_Rx_Structure.CAN_RxMessage.StdId == DR16_R_ID)
+			{
+				DJI_C_DR16_getInfo(CAN2_Rx_Structure);
+			}
 			/*DJIC_IMU*/
 			//IMU_Euler
 			if(CAN2_Rx_Structure.CAN_RxMessage.StdId == DJI_C_Angle)
@@ -615,7 +620,7 @@ void Can2_Reive(void const * argument)
 			}
 		}
 Updata_Hand_Euler_Gyro_Data();
-		task_can2_times++;
+//		task_can2_times++;
 		//    osDelay(1);
 	}
   /* USER CODE END Can2_Reive */

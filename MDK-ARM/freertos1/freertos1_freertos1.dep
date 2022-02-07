@@ -50,7 +50,7 @@ I (..\BSP\BSP_CAN.h)(0x619901C4)
 I (../Core/Inc/can.h)(0x61D7D12B)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x61D04B01)
 I (..\Arithmetic\my_positionPID_bate.h)(0x61D5C741)
-I (..\Device\DJI_C_IMU.h)(0x619901C4)
+I (..\Device\DJI_C_IMU.h)(0x61ECD3D5)
 I (..\add\Vision.h)(0x61D14EFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Core/Inc/usart.h)(0x61D7D156)
@@ -267,7 +267,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x61D04B01
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x61D04B01)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x61D04B01)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEB79DE)
-F (../Core/Src/freertos.c)(0x61D9BAF3)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\add -I ..\BSP -I ..\Device -I ..\Arithmetic -I ..\APP-I.\RTE\_freertos1-IC:\Users\86189\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\86189\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx-o freertos1\freertos.o --omf_browse freertos1\freertos.crf --depend freertos1\freertos.d)
+F (../Core/Src/freertos.c)(0x61ED0AA3)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\add -I ..\BSP -I ..\Device -I ..\Arithmetic -I ..\APP-I.\RTE\_freertos1-IC:\Users\86189\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\86189\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx-o freertos1\freertos.o --omf_browse freertos1\freertos.crf --depend freertos1\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x61D04B01)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -322,7 +322,7 @@ I (..\BSP\BSP_CAN.h)(0x619901C4)
 I (../Core/Inc/can.h)(0x61D7D12B)
 I (..\Device\GM6020.h)(0x619901C4)
 I (..\Arithmetic\my_positionPID_bate.h)(0x61D5C741)
-I (..\Device\DJI_C_IMU.h)(0x619901C4)
+I (..\Device\DJI_C_IMU.h)(0x61ECD3D5)
 I (..\Device\M3508.h)(0x619DAF67)
 I (..\APP\MY_CLOUD_CONTROL.h)(0x61D6B5D5)
 I (..\add\Vision.h)(0x61D14EFD)
@@ -567,7 +567,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x61D04B01
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x61D04B01)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x61D04B01)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEB79DE)
-F (../Core/Src/stm32f4xx_it.c)(0x61D7FAF9)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\add -I ..\BSP -I ..\Device -I ..\Arithmetic -I ..\APP-I.\RTE\_freertos1-IC:\Users\86189\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\86189\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx-o freertos1\stm32f4xx_it.o --omf_browse freertos1\stm32f4xx_it.crf --depend freertos1\stm32f4xx_it.d)
+F (../Core/Src/stm32f4xx_it.c)(0x61ED0AA3)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\add -I ..\BSP -I ..\Device -I ..\Arithmetic -I ..\APP-I.\RTE\_freertos1-IC:\Users\86189\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\86189\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx-o freertos1\stm32f4xx_it.o --omf_browse freertos1\stm32f4xx_it.crf --depend freertos1\stm32f4xx_it.d)
 I (../Core/Inc/main.h)(0x61D7D12C)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x61D04B19)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x61D7D12C)
@@ -616,7 +616,7 @@ I (..\add\DR16_RECIVE.h)(0x619901C4)
 I (../Core/Inc/can.h)(0x61D7D12B)
 I (..\BSP\BSP_CAN.h)(0x619901C4)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x61D04B01)
-I (..\Device\DJI_C_IMU.h)(0x619901C4)
+I (..\Device\DJI_C_IMU.h)(0x61ECD3D5)
 I (..\add\Vision.h)(0x61D14EFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Core/Inc/usart.h)(0x61D7D156)
@@ -1566,7 +1566,7 @@ I (..\Device\GM6020.h)(0x619901C4)
 I (..\BSP\BSP_CAN.h)(0x619901C4)
 I (../Core/Inc/can.h)(0x61D7D12B)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x61D04B01)
-I (..\Device\DJI_C_IMU.h)(0x619901C4)
+I (..\Device\DJI_C_IMU.h)(0x61ECD3D5)
 I (..\Device\M3508.h)(0x619DAF67)
 I (..\APP\MY_CHASSIS_CONTROL.h)(0x61A8C66B)
 I (..\Arithmetic\my_IncrementPID_bate.h)(0x61AF5003)
@@ -2196,8 +2196,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x61D04B01)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x61D04B01)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEB79DE)
 F (..\readme.txt)(0x61D644FC)()
-F (..\Device\DJI_C_IMU.c)(0x61D3A8A7)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\add -I ..\BSP -I ..\Device -I ..\Arithmetic -I ..\APP-I.\RTE\_freertos1-IC:\Users\86189\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\86189\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx-o freertos1\dji_c_imu.o --omf_browse freertos1\dji_c_imu.crf --depend freertos1\dji_c_imu.d)
-I (..\Device\DJI_C_IMU.h)(0x619901C4)
+F (..\Device\DJI_C_IMU.c)(0x61ECD3D5)(--c99 --gnu -c --cpu Cortex-M4.fp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ..\add -I ..\BSP -I ..\Device -I ..\Arithmetic -I ..\APP-I.\RTE\_freertos1-IC:\Users\86189\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include-IC:\Users\86189\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="528" -D_RTE_ -DSTM32F427xx -DUSE_HAL_DRIVER -DSTM32F427xx-o freertos1\dji_c_imu.o --omf_browse freertos1\dji_c_imu.crf --depend freertos1\dji_c_imu.d)
+I (..\Device\DJI_C_IMU.h)(0x61ECD3D5)
 I (../Core/Inc/main.h)(0x61D7D12C)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x61D04B19)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x61D7D12C)
