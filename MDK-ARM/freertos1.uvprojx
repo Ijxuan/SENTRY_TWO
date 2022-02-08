@@ -682,6 +682,11 @@
               <FileType>1</FileType>
               <FilePath>..\Device\RM_JudgeSystem.c</FilePath>
             </File>
+            <File>
+              <FileName>DR16_CAN2_SEND.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\DR16_CAN2_SEND.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
