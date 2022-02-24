@@ -48,3 +48,7 @@ freertos1\dr16_can2_send.o: ..\BSP\BSP_CAN.h
 freertos1\dr16_can2_send.o: ../Core/Inc/can.h
 freertos1\dr16_can2_send.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 freertos1\dr16_can2_send.o: ..\add\DR16_RECIVE.h
+freertos1\dr16_can2_send.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+freertos1\dr16_can2_send.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+freertos1\dr16_can2_send.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+freertos1\dr16_can2_send.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h

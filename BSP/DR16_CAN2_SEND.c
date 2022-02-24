@@ -1,5 +1,8 @@
-#include"DR16_CAN2_SEND.h"
+#include "DR16_CAN2_SEND.h"
 #include "DR16_RECIVE.h"
+#include "FreeRTOS.h"
+#include "cmsis_os.h"
+
 uint8_t DR16_SEND_all[24];  // 3x8=24
 //uint8_t DR16_SEND_part_one[9];
 //uint8_t DR16_SEND_part_two[9];
@@ -16,8 +19,11 @@ for(int i=0;i<18;i++ )//0到17位有效,一共18位
 {
 	DR16_SEND_all[i]=DR16Buffer[i];
 }
+
 DR16_send_part_one();
+osDelay(2);
 DR16_send_part_two();
+osDelay(2);
 DR16_send_part_three();
 
 

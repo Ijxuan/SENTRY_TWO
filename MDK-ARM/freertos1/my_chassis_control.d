@@ -52,3 +52,14 @@ freertos1\my_chassis_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/inclu
 freertos1\my_chassis_control.o: ..\Arithmetic\my_positionPID_bate.h
 freertos1\my_chassis_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 freertos1\my_chassis_control.o: ../Core/Inc/rng.h
+freertos1\my_chassis_control.o: ..\Device\RM_JudgeSystem.h
+freertos1\my_chassis_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+freertos1\my_chassis_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+freertos1\my_chassis_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+freertos1\my_chassis_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+freertos1\my_chassis_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+freertos1\my_chassis_control.o: ../Core/Inc/dma.h
+freertos1\my_chassis_control.o: ../Core/Inc/tim.h
+freertos1\my_chassis_control.o: ../Core/Inc/usart.h
+freertos1\my_chassis_control.o: ../Core/Inc/gpio.h
+freertos1\my_chassis_control.o: ..\Arithmetic\FPS_Calculate.h

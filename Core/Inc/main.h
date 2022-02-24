@@ -53,6 +53,10 @@ extern "C" {
 //extern uint32_t sysclk_to_pendsv;
 //extern int guance1;
 //extern int guance2;
+
+#define HWswitch_1_Pin GPIO_PIN_8
+#define HWswitch_2_Pin GPIO_PIN_9
+
 extern int mydelay_100us;
 extern uint32_t time7_times;//定时器7中断进入次数
 
@@ -119,6 +123,12 @@ extern int time_3_times;
 
 extern float Vision_RawData_Yaw_Angle;
 extern float Vision_RawData_Pitch_Angle;
+extern bool send_to_C;
+extern int send_to_C_times;
+
+extern int CH_TOTAL;
+
+extern float Chassis_PowerLimit;
 
 typedef struct
 {

@@ -106,8 +106,9 @@ void DR16_Process(uint8_t *pData)
 		DR16.rc.ch3 = 0;
 	if (DR16.rc.ch4_DW <= 20 && DR16.rc.ch4_DW >= -20)
 		DR16.rc.ch4_DW = 0;
-		
-
+		CH_TOTAL+=DR16.rc.ch0 ;
+send_to_C=1;
+	
 //				if(DR16.rc.s_left==3)
 ////				targe_angle=-20000;
 //				if(DR16.rc.s_left==1)
@@ -560,20 +561,21 @@ if(0)
 	  */
 	p=0;
 			send_d_32[p++]=ext_power_heat_data.data.chassis_volt;//底盘输出电压 单位 毫伏
-			send_d_32[p++]=ext_power_heat_data.data.chassis_current;//底盘输出电流 单位 W 瓦    2
+			send_d_32[p++]=20;//底盘输出电流 单位 W 瓦    2
 
 			send_d_32[p++]=ext_power_heat_data.data.chassis_power*1000000;//底盘输出功率
 
 			send_d_32[p++]=ext_power_heat_data.data.chassis_power_buffer;//底盘功率缓冲 4		4PID_YES
 
-			send_d_32[p++]=PITCH_EM_Speed_pid.Proportion;//P_OUT		5
+			send_d_32[p++]=(220-ext_power_heat_data.data.chassis_power);//P_OUT		5
 			send_d_32[p++]=PITCH_EM_Speed_pid.I_Output;//I_OUT		6
 			send_d_32[p++]=VisionData.RawData.Pitch_Dir;//D_OUT  	7
 	p=0;
-			send_d_16[p++]=M3508s[3].realSpeed;//输出电压      8
+			send_d_16[p++]=0;//输出电压      8
 
-			send_d_16[p++]=M3508s[3].realCurrent;//fps       	9 				M3508s[3].
-			send_d_16[p++]=send_to_chassis;			//随机数		发送给yaw轴电机
+			send_d_16[p++]=CHASSIS_trage_speed;//fps       	9 				M3508s[3].
+			send_d_16[p++]=send_to_chassis;
+			//随机数		发送给yaw轴电机
 
 #endif
 

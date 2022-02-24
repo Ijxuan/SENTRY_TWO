@@ -14,9 +14,12 @@ void switch_change(void);
 void Random_CHASSIS(void);
 
 void Cruise_CHASSIS(void);
+void Power_Calculate();
 
 
 uint16_t Get_RandomNumbers_Range(int16_t min,int16_t max);
+void Power_Calculate();
+
 
 
 //随机运动结构体

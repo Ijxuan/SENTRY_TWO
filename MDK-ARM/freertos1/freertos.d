@@ -75,3 +75,4 @@ freertos1\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsi
 freertos1\freertos.o: ../Core/Inc/dma.h
 freertos1\freertos.o: ../Core/Inc/rng.h
 freertos1\freertos.o: ../Core/Inc/gpio.h
+freertos1\freertos.o: ..\BSP\DR16_CAN2_SEND.h
