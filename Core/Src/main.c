@@ -106,7 +106,9 @@ void MX_FREERTOS_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 //uint32_t time_every100us=0;
-//int time_every1s=0;
+int time_every1s=0;
+uint32_t time_every100ms=0;
+
 //uint32_t task2_times=0;
 //uint32_t task3_times=0;
 //uint32_t pendsv_times=0;
@@ -179,6 +181,7 @@ short int speed_change_times=0;
 float DEBUFF=0;
 
 int uart_8_times=0;
+int uart_3_times=0;
 
 
 int time_3_times=0;
@@ -191,6 +194,12 @@ int send_to_C_times;
 
 int CH_TOTAL=0;
 float Chassis_PowerLimit=1;
+bool stop_chassic_output=0;
+bool stop_CH_OP_BC_END=0;
+int stop_CH_OP_BC_END_times=0;
+bool stop_CH_OP_BC_LESS=0;
+int stop_CH_OP_BC_LESS_times=0;
+
 //driver  plate
 /* USER CODE END 0 */
 

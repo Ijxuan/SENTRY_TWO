@@ -31,6 +31,7 @@
 #include "Vision.h"
 #include "timer.h"
 #include "RM_JudgeSystem.h"
+#include "M3508.h"
 
 //#include "task.h"
 
@@ -38,6 +39,19 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
+#define pai 3.1415926535897932384626433832795f
+float lun_1_quan_m=pai*0.06;
+int last_time_s=0;
+uint32_t last_time_100_ms=0;
+
+int last_time_totalangle=0;
+int last_time_totalangle_100_ms=0;
+
+float speed_every_1s=0;
+float speed_every_100_ms=0;
+
+int angle_1_s=0;
+int angle_100_ms=0;
 
 /* USER CODE END TD */
 
@@ -317,6 +331,7 @@ DR_16hander(&huart1);
 void USART3_IRQHandler(void)
 {
   /* USER CODE BEGIN USART3_IRQn 0 */
+	uart_3_times++;
 	JudgeSystem_Handler(&huart3);
 
   /* USER CODE END USART3_IRQn 0 */
@@ -343,13 +358,29 @@ void TIM6_DAC_IRQHandler(void)
 /**
   * @brief This function handles TIM7 global interrupt.
   */
+
 void TIM7_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM7_IRQn 0 */
 time7_times++;//定时器7中断进入次数
 //现在是1ms进入一次中断
 // time_every100us++;
-// time_every1s=time_every100us/10000;
+ time_every1s=time7_times/1000;
+	time_every100ms=time7_times/100;
+	if(time_every1s!=last_time_s)//每秒刷新
+	{
+		angle_1_s=M3508s[3].totalAngle-last_time_totalangle;
+		speed_every_1s=(angle_1_s/8191)/14*lun_1_quan_m;//这一秒走过的路程 变成圈数 再经过减速比 最后根据轮径
+		last_time_totalangle=M3508s[3].totalAngle;
+	}
+		if(time_every100ms!=last_time_100_ms)//每0.1秒刷新
+	{
+		angle_100_ms=M3508s[3].totalAngle-last_time_totalangle_100_ms;
+//		speed_every_100_ms=(angle_100_ms/8191.0)/19.0*lun_1_quan_m;//这一秒走过的路程 变成圈数 再经过减速比 最后根据轮径
+		speed_every_100_ms=angle_100_ms*lun_1_quan_m/8191.0/14.0*10;//这100m秒走过的路程 变成圈数 再经过减速比 最后根据轮径
+
+		last_time_totalangle_100_ms=M3508s[3].totalAngle;
+	}
 	every_1s_times=task_controul_times/(time7_times/1000);
 
 //	every1s_task2times=task2_times/time_every1s;
@@ -358,7 +389,9 @@ time7_times++;//定时器7中断进入次数
 	
 	
 //			 	  guance1=time_every100us- mydelay_100us;
+		last_time_100_ms=time_every100ms;
 
+last_time_s=time_every1s;
   /* USER CODE END TIM7_IRQn 0 */
   HAL_TIM_IRQHandler(&htim7);
   /* USER CODE BEGIN TIM7_IRQn 1 */

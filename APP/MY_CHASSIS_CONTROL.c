@@ -1,15 +1,21 @@
 #include "MY_CHASSIS_CONTROL.h"
+#include "CHASSIS_CONTROL_2.h"
+
 #include "math.h"
 #include "rng.h"
 #include "RM_JudgeSystem.h"
+//往3508增大的方向是左边,接PA8
+//往3508减小的方向是右边,接PA9
 
-#define HW_SWITCH_JR 2000
 
-bool CHASSIS_L_MAX_new=0;//左右边界值是否更新
-bool CHASSIS_R_MIN_new=0;
-bool Random_CHASSIS_CHOOSE=0;//是否选择随机模式
-bool Cruise_CHASSIS_CHOOSE=1;//是否选择巡航模式
-
+bool Random_CHASSIS_CHOOSE=1;//是否选择随机模式
+bool Cruise_CHASSIS_CHOOSE=0;//是否选择巡航模式
+int arrive_speed_times=0;
+int disable_times=0;
+int disable_targe_times=100;//失能持续时间:100  150  200 250  300
+int next_disable_start_times=200;//下次失能间隔时间:200  300 400 500
+int whether_change_direction=0;//重新使能时是否变向
+CH_DO_NOT_STOP_AT_ONE_AREA DO_NOT_STOP;//不要在同一区域停留过久
 void CHASSIS_CONTROUL(void)
 {
 	#if PID_CHASSIS_MOTOR
@@ -21,6 +27,7 @@ void CHASSIS_CONTROUL(void)
 						
 				if(CHASSIS_R_MIN_new==1&&CHASSIS_L_MAX_new==1	)	//只有当边界值更新完了才会  真正开始巡航	
 				{
+					
 				if(DR16.rc.ch4_DW<=-400)//拨上
 				{
 					
@@ -35,28 +42,29 @@ void CHASSIS_CONTROUL(void)
 					
 				}
 				if(Cruise_CHASSIS_CHOOSE==1)//是选择巡航模式
-				Cruise_CHASSIS();//巡航模式
+//				Cruise_CHASSIS();//巡航模式
+				CHASSIS_CONTROUL_2();
 				if(Random_CHASSIS_CHOOSE==1)//是选择巡航模式
 				Random_CHASSIS();//随机模式
 				
-				CHASSIS_trage_speed=0;//锁死
+//				CHASSIS_trage_speed=0;//锁死
 					
 				}
-				else
-				{
-					if( HWswitch_L==0)// 左光电感应到了，向右运动
-					CHASSIS_trage_angle=-9990000;
-					else if(HWswitch_R==0)//	右光电感应到了，向左运动
-					CHASSIS_trage_angle=9990000;
-				
-					P_PID_bate(&CHASSIS_MOTOR_ANGLE_pid, CHASSIS_trage_angle,M3508s[3].totalAngle);//GM6020s[EMID].totalAngle readAngle
+//				else
+//				{
+////					if( HWswitch_L==0)// 左光电感应到了，向右运动
+////					CHASSIS_trage_angle=-9990000;
+////					else if(HWswitch_R==0)//	右光电感应到了，向左运动
+////					CHASSIS_trage_angle=9990000;
+////				
+////					P_PID_bate(&CHASSIS_MOTOR_ANGLE_pid, CHASSIS_trage_angle,M3508s[3].totalAngle);//GM6020s[EMID].totalAngle readAngle
 
-					CHASSIS_trage_speed=CHASSIS_MOTOR_ANGLE_pid.result;//双环
-//					else 				//默认向左运动
-//					CHASSIS_trage_angle=990000;		
-				CHASSIS_trage_speed=0;//锁死
-					
-				}
+////					CHASSIS_trage_speed=CHASSIS_MOTOR_ANGLE_pid.result;//双环
+//////					else 				//默认向左运动
+//////					CHASSIS_trage_angle=990000;		
+////				CHASSIS_trage_speed=0;//锁死
+//					
+//				}
 
 					}
 //			CHASSIS_MOTOR_ANGLE_pid.Max_result=1200;
@@ -65,6 +73,8 @@ void CHASSIS_CONTROUL(void)
 					{
 					CHASSIS_trage_speed=(DR16.rc.ch3*1.0/660.0)*(-1)*CHASSIS_MAX_SPEED;//遥控器给速度目标值 二选一		
 					}
+
+
 					//		yaw_trage_speed=(DR16.rc.ch3*1.0/660.0)*22;
 					P_PID_bate(&CHASSIS_MOTOR_SPEED_pid, CHASSIS_trage_speed,M3508s[3].realSpeed);
 			send_to_chassis=CHASSIS_MOTOR_SPEED_pid.result;
@@ -72,52 +82,18 @@ void CHASSIS_CONTROUL(void)
 //					send_to_chassis=CHASSIS_MOTOR_SPEED_pid.result*Chassis_PowerLimit;
 #endif
 	
-//	if(Chassis_Encoder.totalLine>ENCODER_ARRIVE_MAX)
-//		ENCODER_ARRIVE_MAX=Chassis_Encoder.totalLine;
-//	if(Chassis_Encoder.totalLine<ENCODER_ARRIVE_MIN)
-//		ENCODER_ARRIVE_MIN=Chassis_Encoder.totalLine;
+
 	
 }
 
-void switch_change(void)
-{
-			HWswitch_L			 = HAL_GPIO_ReadPin(GPIOA,HWswitch_1_Pin);
-			HWswitch_R   		 = HAL_GPIO_ReadPin(GPIOA,HWswitch_2_Pin);
-			//光电变化检测  函数
-	if(HWswitch_L!=HWswitch_L_last	)
-	{
-			if(HWswitch_L_last==1)//		0<--1
-			{
-				CHASSIS_L_MAX=M3508s[3].totalAngle+HW_SWITCH_JR;
-//				ENCODER_L_MAX=Chassis_Encoder.totalLine+8850;
-				CHASSIS_L_MAX_new=1;//边界值已更新
-			}
-		
-	}
-	if(HWswitch_R!=HWswitch_R_last	)
-	{
-			if(HWswitch_R_last==1)//		1-->0
-			{
-				CHASSIS_R_MIN=M3508s[3].totalAngle-HW_SWITCH_JR;
-//				ENCODER_R_MIN=Chassis_Encoder.totalLine-8978;
-				CHASSIS_R_MIN_new=1;//边界值已更新
 
-			}
-		
-	}	
-	
-			HWswitch_L_last		=HWswitch_L;
-			HWswitch_R_last		=HWswitch_R;
-	
-	
-}
 
 
 Random_t RANDOM_CHASSIS;
 
 const uint16_t Random_CHANGE_times = 500; //500ms间隔采样
 const uint8_t Random_Proportion = 10;      //随机概率(100-Random_Proportion)
-const uint16_t Random_CHANGE_speed = 2500;      //再次变向要达到这个速度以上
+const uint16_t Random_CHANGE_speed = 1500;      //再次变向要达到这个速度以上
 
 //随机模式
 void Random_CHASSIS(void)
@@ -134,7 +110,16 @@ void Random_CHASSIS(void)
 	#if 1
 	if(	abs(M3508s[3].realSpeed) >Random_CHANGE_speed	)
 	    RANDOM_CHASSIS.sampling++;
+	if(DO_NOT_STOP.This_area_stay_times>1000)//在同一区域停留超过3s,开始跑图
+	{
+		RANDOM_CHASSIS.sampling=0;
+		arrive_speed_times=0;
+					stop_CH_OP_BC_LESS=0;
 
+	}
+	
+//		if(	arrive_targe_angle==1	)
+//	    RANDOM_CHASSIS.sampling++;
 	#endif
 						Power_Calculate();
 
@@ -155,12 +140,40 @@ void Random_CHASSIS(void)
         if (RANDOM_CHASSIS.number >= Random_Proportion)//是否变向
         {
             CHASSIS_trage_speed = -CHASSIS_trage_speed;
+			arrive_targe_angle=0;
+			stop_CH_OP_BC_LESS=0;
 			speed_change_times++;
         }
         RANDOM_CHASSIS.sampling = 0;//这个函数运行500次才会进入一次变向判断
     }
 	
-
+						if(abs(CHASSIS_trage_speed)>1500)
+					{
+						if(abs(M3508s[3].realSpeed)>(abs(CHASSIS_trage_speed)-200))
+						{
+						arrive_speed_times++;	
+							
+						}
+						
+					}
+					if(arrive_speed_times>150)//有规律失能
+					{
+						if(abs(M3508s[3].realSpeed)<(abs(CHASSIS_trage_speed)-2000))
+						{
+						disable_times++;	
+							
+						}
+						stop_CH_OP_BC_LESS=1;
+//						CHASSIS_trage_speed=0;
+						if(disable_times>80)
+						{
+							arrive_speed_times=0;
+							disable_times=0;
+							stop_CH_OP_BC_LESS=0;
+						}
+						
+						
+					}
 
 	
 }
@@ -210,7 +223,7 @@ void Cruise_CHASSIS(void)//		cruise	巡航
 
 Encoder_t Chassis_Encoder;
 
-
+//获取编码器值函数
 void Get_Encoder_Value(Encoder_t* Chassis_Encoder,TIM_HandleTypeDef* htim_ab)
 {
 	
@@ -244,14 +257,10 @@ void Power_Calculate()
 	if(ext_power_heat_data.data.chassis_power_buffer < 50)flag = 1;
 	if(flag==1 && ext_power_heat_data.data.chassis_power_buffer > 150)flag=0;
 	
-	if(flag==1)Chassis_PowerLimit = 0.6f;
+	if(flag==1)Chassis_PowerLimit = 0.65f;
 	else Chassis_PowerLimit = 1.0f;
 	
 }
-
-
-
-
 
 
 

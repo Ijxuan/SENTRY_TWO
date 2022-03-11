@@ -45,6 +45,8 @@
 #include "User_math.h"
 #include "RM_JudgeSystem.h"
 #include "DR16_CAN2_SEND.h"
+#include "CHASSIS_CONTROL_basic.h"
+#include "CHASSIS_CONTROL_2.h"
 
 //#include "task.h"
 
@@ -85,16 +87,16 @@ osThreadId Task_Can2_ReiveHandle;
 
 /* USER CODE END FunctionPrototypes */
 
-void StartDefaultTask(void const *argument);
-void CAN1_recive(void const *argument);
-void DeBug(void const *argument);
-void init_task(void const *argument);
-void Can2_Reive(void const *argument);
+void StartDefaultTask(void const * argument);
+void CAN1_recive(void const * argument);
+void DeBug(void const * argument);
+void init_task(void const * argument);
+void Can2_Reive(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
-void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize);
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
 
 /* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
 static StaticTask_t xIdleTaskTCBBuffer;
@@ -110,56 +112,55 @@ void vApplicationGetIdleTaskMemory(StaticTask_t **ppxIdleTaskTCBBuffer, StackTyp
 /* USER CODE END GET_IDLE_TASK_MEMORY */
 
 /**
- * @brief  FreeRTOS initialization
- * @param  None
- * @retval None
- */
-void MX_FREERTOS_Init(void)
-{
-	/* USER CODE BEGIN Init */
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
+  */
+void MX_FREERTOS_Init(void) {
+  /* USER CODE BEGIN Init */
 
-	/* USER CODE END Init */
+  /* USER CODE END Init */
 
-	/* USER CODE BEGIN RTOS_MUTEX */
+  /* USER CODE BEGIN RTOS_MUTEX */
 	/* add mutexes, ... */
-	/* USER CODE END RTOS_MUTEX */
+  /* USER CODE END RTOS_MUTEX */
 
-	/* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
 	/* add semaphores, ... */
-	/* USER CODE END RTOS_SEMAPHORES */
+  /* USER CODE END RTOS_SEMAPHORES */
 
-	/* USER CODE BEGIN RTOS_TIMERS */
+  /* USER CODE BEGIN RTOS_TIMERS */
 	/* start timers, add new ones, ... */
-	/* USER CODE END RTOS_TIMERS */
+  /* USER CODE END RTOS_TIMERS */
 
-	/* USER CODE BEGIN RTOS_QUEUES */
+  /* USER CODE BEGIN RTOS_QUEUES */
 	/* add queues, ... */
 	CAN1_Queue = xQueueCreate(32, sizeof(CAN_Rx_TypeDef));
 	CAN2_Queue = xQueueCreate(32, sizeof(CAN_Rx_TypeDef));
-	/* USER CODE END RTOS_QUEUES */
+  /* USER CODE END RTOS_QUEUES */
 
-	/* Create the thread(s) */
-	/* definition and creation of defaultTask */
-	osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 128);
-	defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+  /* Create the thread(s) */
+  /* definition and creation of defaultTask */
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 128);
+  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-	/* definition and creation of MYTask03 */
-	osThreadDef(MYTask03, CAN1_recive, osPriorityAboveNormal, 0, 128);
-	MYTask03Handle = osThreadCreate(osThread(MYTask03), NULL);
+  /* definition and creation of MYTask03 */
+  osThreadDef(MYTask03, CAN1_recive, osPriorityAboveNormal, 0, 128);
+  MYTask03Handle = osThreadCreate(osThread(MYTask03), NULL);
 
-	/* definition and creation of myTask04 */
-	osThreadDef(myTask04, DeBug, osPriorityNormal, 0, 128);
-	myTask04Handle = osThreadCreate(osThread(myTask04), NULL);
+  /* definition and creation of myTask04 */
+  osThreadDef(myTask04, DeBug, osPriorityNormal, 0, 128);
+  myTask04Handle = osThreadCreate(osThread(myTask04), NULL);
 
-	/* definition and creation of myTaskforinit */
-	osThreadDef(myTaskforinit, init_task, osPriorityBelowNormal, 0, 128);
-	myTaskforinitHandle = osThreadCreate(osThread(myTaskforinit), NULL);
+  /* definition and creation of myTaskforinit */
+  osThreadDef(myTaskforinit, init_task, osPriorityBelowNormal, 0, 128);
+  myTaskforinitHandle = osThreadCreate(osThread(myTaskforinit), NULL);
 
-	/* definition and creation of Task_Can2_Reive */
-	osThreadDef(Task_Can2_Reive, Can2_Reive, osPriorityAboveNormal, 0, 256);
-	Task_Can2_ReiveHandle = osThreadCreate(osThread(Task_Can2_Reive), NULL);
+  /* definition and creation of Task_Can2_Reive */
+  osThreadDef(Task_Can2_Reive, Can2_Reive, osPriorityAboveNormal, 0, 256);
+  Task_Can2_ReiveHandle = osThreadCreate(osThread(Task_Can2_Reive), NULL);
 
-	/* USER CODE BEGIN RTOS_THREADS */
+  /* USER CODE BEGIN RTOS_THREADS */
 	/* add threads, ...
   defaultTask    	245		<1%
   Task_Robot_Cont	1580		1%
@@ -167,7 +168,8 @@ void MX_FREERTOS_Init(void)
   MYTask03       	7604		7%   CAN1
   myTask04       	1385		1%   DEBUG
   IDLE           	80866		81%  */
-	/* USER CODE END RTOS_THREADS */
+  /* USER CODE END RTOS_THREADS */
+
 }
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -177,15 +179,15 @@ void MX_FREERTOS_Init(void)
  * @retval None
  */
 /* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const *argument)
+void StartDefaultTask(void const * argument)
 {
-	/* USER CODE BEGIN StartDefaultTask */
+  /* USER CODE BEGIN StartDefaultTask */
 	/* Infinite loop */
 	for (;;)
 	{
 		osDelay(1);
 	}
-	/* USER CODE END StartDefaultTask */
+  /* USER CODE END StartDefaultTask */
 }
 
 /* USER CODE BEGIN Header_CAN1_recive */
@@ -196,9 +198,9 @@ void StartDefaultTask(void const *argument)
  */
 int last_turnCount = 0;
 /* USER CODE END Header_CAN1_recive */
-void CAN1_recive(void const *argument)
+void CAN1_recive(void const * argument)
 {
-	/* USER CODE BEGIN CAN1_recive */
+  /* USER CODE BEGIN CAN1_recive */
 	// CAN1接收队列发送的数据的结构体变量
 	CAN_Rx_TypeDef CAN1_Rx_Structure;
 	task_can_times++;
@@ -280,7 +282,7 @@ void CAN1_recive(void const *argument)
 
 		// osDelay(1);
 	}
-	/* USER CODE END CAN1_recive */
+  /* USER CODE END CAN1_recive */
 }
 
 /* USER CODE BEGIN Header_DeBug */
@@ -292,9 +294,9 @@ void CAN1_recive(void const *argument)
 char RunTimeInfo[400]; //保存任务运行时间信息
 uint16_t times_i;
 /* USER CODE END Header_DeBug */
-void DeBug(void const *argument)
+void DeBug(void const * argument)
 {
-	/* USER CODE BEGIN DeBug */
+  /* USER CODE BEGIN DeBug */
 	/* Infinite loop */
 	for (;;)
 	{
@@ -338,7 +340,7 @@ void DeBug(void const *argument)
 		//			printf("%s\r\n",RunTimeInfo);
 		osDelay(1);
 	}
-	/* USER CODE END DeBug */
+  /* USER CODE END DeBug */
 }
 
 /* USER CODE BEGIN Header_init_task */
@@ -348,9 +350,9 @@ void DeBug(void const *argument)
  * @retval None
  */
 /* USER CODE END Header_init_task */
-void init_task(void const *argument)
+void init_task(void const * argument)
 {
-	/* USER CODE BEGIN init_task */
+  /* USER CODE BEGIN init_task */
 
 	portTickType xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
@@ -534,7 +536,7 @@ void init_task(void const *argument)
 
 	EM_Ramp->Rate = 0.1;
 	EM_Ramp->Absolute_Max = 50;
-
+ext_power_heat_data.data.chassis_power_buffer=200;
 	osThreadDef(Control, Robot_Control, RobotCtrl_Priority, 0, RobotCtrl_Size);
 	RobotCtrl_Handle = osThreadCreate(osThread(Control), NULL);
 
@@ -550,7 +552,7 @@ void init_task(void const *argument)
 
 		HAL_Delay(100);
 	}
-	/* USER CODE END init_task */
+  /* USER CODE END init_task */
 }
 
 /* USER CODE BEGIN Header_Can2_Reive */
@@ -560,9 +562,9 @@ void init_task(void const *argument)
  * @retval None
  */
 /* USER CODE END Header_Can2_Reive */
-void Can2_Reive(void const *argument)
+void Can2_Reive(void const * argument)
 {
-	/* USER CODE BEGIN Can2_Reive */
+  /* USER CODE BEGIN Can2_Reive */
 	// CAN2接收队列发送的数据的结构体变量
 	CAN_Rx_TypeDef CAN2_Rx_Structure;
 	//出队的状态变量
@@ -598,7 +600,7 @@ void Can2_Reive(void const *argument)
 		//		task_can2_times++;
 		//    osDelay(1);
 	}
-	/* USER CODE END Can2_Reive */
+  /* USER CODE END Can2_Reive */
 }
 
 /* Private application code --------------------------------------------------*/
@@ -639,12 +641,29 @@ void Robot_Control(void const *argument)
 		GM6020_SetVoltage(send_to_yaw, send_to_pitch, 0, 0); //云台  send_to_pitch
 		Get_Encoder_Value(&Chassis_Encoder, &htim5);
 		switch_change();
+		star_and_new();
 		CHASSIS_CONTROUL();
 
 		shoot_control();
 
 		driver_plate_control();
+	
+if(stop_CH_OP_BC_LESS==1)
+{
+			send_to_chassis = 0;
 
+}
+
+if(stop_CH_OP_BC_END==1)
+{
+			send_to_chassis = 0;
+
+}
+if(stop_chassic_output==1)
+{
+			send_to_chassis = 0;
+
+}
 		if (DR16.rc.s_left == 2 || DR16.rc.s_left == 0) //失能保护
 		{
 			send_to_chassis = 0;

@@ -342,10 +342,10 @@ if(0)
 			send_d_32[p++]=CHASSIS_MOTOR_SPEED_pid.I_Output;//I_OUT		6
 			send_d_32[p++]=CHASSIS_MOTOR_SPEED_pid.D_Output;//D_OUT  	7
 	p=0;
-			send_d_16[p++]=CHASSIS_MOTOR_SPEED_pid.result;//输出电压      8
+			send_d_16[p++]=speed_change_times;//输出电压      8
 
-			send_d_16[p++]=0;//目标角度       	9
-			send_d_16[p++]=0;//当前角度		10
+			send_d_16[p++]=stop_chassic_output*1000;//目标角度       	9
+			send_d_16[p++]=send_to_chassis;//当前角度		10
 
 #endif
 #if 0//发送摩擦轮3508数据

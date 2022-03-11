@@ -46,7 +46,9 @@ extern "C" {
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
 //extern uint32_t time_every100us;
-//extern int time_every1s;
+extern int time_every1s;
+extern uint32_t time_every100ms;
+
 //extern	uint32_t task2_times;
 //extern uint32_t task3_times;
 //extern uint32_t pendsv_times;
@@ -129,6 +131,13 @@ extern int send_to_C_times;
 extern int CH_TOTAL;
 
 extern float Chassis_PowerLimit;
+extern bool stop_chassic_output;
+extern bool stop_CH_OP_BC_END;
+extern int stop_CH_OP_BC_END_times;
+extern bool stop_CH_OP_BC_LESS;
+extern int stop_CH_OP_BC_LESS_times;
+
+extern int uart_3_times;
 
 typedef struct
 {
@@ -170,6 +179,10 @@ uint32_t MY_GetTick(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Encoder_A_Pin GPIO_PIN_0
+#define Encoder_A_GPIO_Port GPIOA
+#define Encoder_B_Pin GPIO_PIN_1
+#define Encoder_B_GPIO_Port GPIOA
 #define Judge_TX_Pin GPIO_PIN_8
 #define Judge_TX_GPIO_Port GPIOD
 #define Judge_RX_Pin GPIO_PIN_9
