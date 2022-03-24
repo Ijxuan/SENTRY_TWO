@@ -53,6 +53,7 @@ freertos1\dr16_recive.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queu
 freertos1\dr16_recive.o: ..\Device\DJI_C_IMU.h
 freertos1\dr16_recive.o: ..\Device\M3508.h
 freertos1\dr16_recive.o: ..\APP\MY_CHASSIS_CONTROL.h
+freertos1\dr16_recive.o: ..\Arithmetic\User_math.h
 freertos1\dr16_recive.o: ..\Arithmetic\my_IncrementPID_bate.h
 freertos1\dr16_recive.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\Math.h
 freertos1\dr16_recive.o: ..\add\Vision.h

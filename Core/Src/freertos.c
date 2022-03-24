@@ -309,7 +309,14 @@ void DeBug(void const * argument)
 			DR16_send_master_control();
 			send_to_C_times++;
 			send_to_C = 0;
+		}	
+		if (send_to_C_JS == 1)
+		{
+JS_send_control();
+			JS_SEND_times++;
+			send_to_C_JS=0;
 		}
+		
 		if (DR16.rc.s_right == 3) //是否上位机
 		{
 
@@ -602,7 +609,7 @@ void Can2_Reive(void const * argument)
 	}
   /* USER CODE END Can2_Reive */
 }
-
+int test_3_moto=0;
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
 void Robot_Control(void const *argument)
@@ -611,6 +618,8 @@ void Robot_Control(void const *argument)
 	portTickType xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 	const TickType_t TimeIncrement = pdMS_TO_TICKS(3); //每1毫秒强制进入总控制
+	CHASSIS.Absolute_Max=4000;
+	CHASSIS.Rate=25;
 	/* Infinite loop */
 	for (;;)
 	{
@@ -641,7 +650,7 @@ void Robot_Control(void const *argument)
 		GM6020_SetVoltage(send_to_yaw, send_to_pitch, 0, 0); //云台  send_to_pitch
 		Get_Encoder_Value(&Chassis_Encoder, &htim5);
 		switch_change();
-		star_and_new();
+//		star_and_new();//弹道测试后取消注释
 		CHASSIS_CONTROUL();
 
 		shoot_control();
@@ -650,28 +659,31 @@ void Robot_Control(void const *argument)
 	
 if(stop_CH_OP_BC_LESS==1)
 {
-			send_to_chassis = 0;
+//			send_to_chassis = 0;//弹道测试后取消注释
 
 }
 
 if(stop_CH_OP_BC_END==1)
 {
-			send_to_chassis = 0;
+//			send_to_chassis = 0;//弹道测试后取消注释
 
 }
 if(stop_chassic_output==1)
 {
-			send_to_chassis = 0;
+//			send_to_chassis = 0;//弹道测试后取消注释
 
 }
 		if (DR16.rc.s_left == 2 || DR16.rc.s_left == 0) //失能保护
 		{
+			CHASSIS_MOTOR_SPEED_pid.Integral=0;
 			send_to_chassis = 0;
 			send_to_SHOOT_R = 0;
 			send_to_SHOOT_L = 0;
 			send_to_driver = 0;
+//			 cloud_enable=0;
+
 		}
-		M3508s1_setCurrent(send_to_SHOOT_L, send_to_SHOOT_R, send_to_driver, send_to_chassis);
+		M3508s1_setCurrent(0, 0, test_3_moto, send_to_chassis);
 		vTaskDelayUntil(&xLastWakeTime, TimeIncrement);
 
 		//			  	  HAL_Delay(100);

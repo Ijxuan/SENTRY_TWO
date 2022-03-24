@@ -6,6 +6,7 @@
 
 
 #define HW_SWITCH_JR 2000
+#define GD_LONG 999999
 
 bool CHASSIS_L_MAX_new=0;//左右边界值是否更新
 bool CHASSIS_R_MIN_new=0;
@@ -34,8 +35,9 @@ void switch_change(void)
 
 			}
 		
-	}	
+	}
 	
+ENCODER_LONG=	CHASSIS_L_MAX-CHASSIS_R_MIN;
 			HWswitch_L_last		=HWswitch_L;
 			HWswitch_R_last		=HWswitch_R;
 	DO_NOT_STOP.Point_of_3section.point_one=CHASSIS_R_MIN+(CHASSIS_L_MAX-CHASSIS_R_MIN)/3;

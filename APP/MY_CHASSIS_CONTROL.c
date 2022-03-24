@@ -6,7 +6,7 @@
 #include "RM_JudgeSystem.h"
 //往3508增大的方向是左边,接PA8
 //往3508减小的方向是右边,接PA9
-
+Ramp_Struct CHASSIS;
 
 bool Random_CHASSIS_CHOOSE=1;//是否选择随机模式
 bool Cruise_CHASSIS_CHOOSE=0;//是否选择巡航模式
@@ -47,7 +47,7 @@ void CHASSIS_CONTROUL(void)
 				if(Random_CHASSIS_CHOOSE==1)//是选择巡航模式
 				Random_CHASSIS();//随机模式
 				
-//				CHASSIS_trage_speed=0;//锁死
+				CHASSIS_trage_speed=0;//锁死//弹道测试后取消注释
 					
 				}
 //				else
@@ -73,11 +73,24 @@ void CHASSIS_CONTROUL(void)
 					{
 					CHASSIS_trage_speed=(DR16.rc.ch3*1.0/660.0)*(-1)*CHASSIS_MAX_SPEED;//遥控器给速度目标值 二选一		
 					}
-
+if(1)
+{	
+CHASSIS.Current_Value=M3508s[3].realSpeed;					
+CHASSIS.Target_Value=CHASSIS_trage_speed;
+CHASSIS_trage_speed_temp=Ramp_Function(&CHASSIS);
+					//		yaw_trage_speed=(DR16.rc.ch3*1.0/660.0)*22;
+	
+	CHASSIS_trage_speed_temp=0;//始终锁死在轨道上//弹道测试后取消注释
+					P_PID_bate(&CHASSIS_MOTOR_SPEED_pid, CHASSIS_trage_speed_temp,M3508s[3].realSpeed);
+	send_to_chassis=CHASSIS_MOTOR_SPEED_pid.result;
+}
+if(0)
+{
 
 					//		yaw_trage_speed=(DR16.rc.ch3*1.0/660.0)*22;
 					P_PID_bate(&CHASSIS_MOTOR_SPEED_pid, CHASSIS_trage_speed,M3508s[3].realSpeed);
-			send_to_chassis=CHASSIS_MOTOR_SPEED_pid.result;
+	send_to_chassis=CHASSIS_MOTOR_SPEED_pid.result;	
+}
 //					Power_Calculate();
 //					send_to_chassis=CHASSIS_MOTOR_SPEED_pid.result*Chassis_PowerLimit;
 #endif
@@ -241,7 +254,22 @@ void Get_Encoder_Value(Encoder_t* Chassis_Encoder,TIM_HandleTypeDef* htim_ab)
 	Chassis_Encoder->totalLine = Chassis_Encoder->realValue_AB + Chassis_Encoder->Counts * OneLoop_LineNumber;
 	
 	Chassis_Encoder->lastValue_AB = Chassis_Encoder->realValue_AB;
+	M3508_3ms_change=M3508s[3].totalAngle-M3508_3ms_ago;
+	ENCODER_SPEED=Chassis_Encoder->totalLine-Chassis_Encoder->TargerLine;
+//	ENCODER_ADD=Chassis_Encoder->realValue_AB-Chassis_Encoder->lastValue_AB;
+	if(M3508_3ms_change!=0)//在运动
+	{
+	encoder_fbl_k=	(ENCODER_SPEED*1.0)/M3508s[3].realSpeed;
+	}
 	
+//	int M3508_3ms_ago_total_angle;//3毫秒以前的值
+//int M3508_3ms_ago_speed;//3毫秒改变的值
+//float M3508_speed_angle_kp;//角度与速度的关系
+	
+	M3508_speed_angle_kp=M3508s[3].realSpeed/1.0/(M3508s[3].totalAngle-M3508_3ms_ago);//2.45
+	Chassis_Encoder->TargerLine=Chassis_Encoder->totalLine;
+	M3508_3ms_ago=	M3508s[3].totalAngle;
+    M3508_3ms_ago_speed=M3508s[3].realSpeed;
 }
 
 

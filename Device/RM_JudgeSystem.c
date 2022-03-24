@@ -1643,6 +1643,7 @@ void Judge_GetMessage(uint16_t Data_Length)
 					memcpy(&ext_shoot_data.data.dataBuff, &JudgeSystem_rxBuff[n + 7], sizeof(uint8_t[7]));
 					n += JudgeLength_RealTime_Shoot;
 					ext_shoot_data.InfoUpdataFlag = 1;
+					send_to_C_JS=1;//·¢ËÍ¸øC°å
 				}
 				else
 					n++;

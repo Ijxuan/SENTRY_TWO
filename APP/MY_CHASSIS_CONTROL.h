@@ -6,6 +6,7 @@
 #include "M3508.h"
 #include "my_positionPID_bate.h"
 //#include "DJI_C_IMU.h"
+#include "User_math.h"
 
 void CHASSIS_CONTROUL(void);
 
@@ -78,6 +79,8 @@ typedef struct
 extern Encoder_t Chassis_Encoder;
 extern bool CHASSIS_L_MAX_new;//左右边界值是否更新
 extern bool CHASSIS_R_MIN_new;
+extern Ramp_Struct CHASSIS;
+
 void Get_Encoder_Value(Encoder_t* Chassis_Encoder,TIM_HandleTypeDef* htim_ab);
 
 #define OneLoop_LineNumber (1024*4)//编码器一圈

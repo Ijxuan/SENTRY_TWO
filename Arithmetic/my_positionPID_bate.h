@@ -15,8 +15,8 @@
 #define PID_CHASSIS_MOTOR 1//是否开启电机的底盘PID  0关闭
 
 
-#define PID_YAW_EM 1//是否开启PITCH的自瞄  0关闭
-#define PID_PITCH_EM 1//是否开启PITCH的自瞄  0关闭
+#define PID_YAW_EM 0//是否开启PITCH的自瞄  0关闭
+#define PID_PITCH_EM 0//是否开启PITCH的自瞄  0关闭
 
 typedef struct
 {

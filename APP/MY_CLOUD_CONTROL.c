@@ -9,8 +9,9 @@ void cloud_control(void)
 	
 								if(DR16.rc.s_left==1)//YAW轴控制挡位
 							{
-							yaw_trage_angle+=(DR16.rc.ch0/660.0)/-3;//YAW轴遥控器控制
-								PITCH_trage_angle+=(DR16.rc.ch1/660.0)*5;//pitch轴遥控器控制
+//							yaw_trage_angle+=(DR16.rc.ch0/660.0)/-3;//YAW轴遥控器控制
+//								PITCH_trage_angle+=(DR16.rc.ch1/660.0)*5;//pitch轴遥控器控制
+								
 //							if(DR16.rc.ch4_DW<=-400)//拨上
 //							yaw_trage_angle=yaw_trage_angle2;//陀螺仪角速度最大为140
 							/*
@@ -40,7 +41,7 @@ void YAW_PID()
 {
 	//							PITCH_trage_angle=0;//保持水平位置
 
-	
+
 	
 	
 	

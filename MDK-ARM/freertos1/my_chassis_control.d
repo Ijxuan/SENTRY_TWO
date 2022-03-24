@@ -50,6 +50,7 @@ freertos1\my_chassis_control.o: ..\BSP\BSP_CAN.h
 freertos1\my_chassis_control.o: ../Core/Inc/can.h
 freertos1\my_chassis_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 freertos1\my_chassis_control.o: ..\Arithmetic\my_positionPID_bate.h
+freertos1\my_chassis_control.o: ..\Arithmetic\User_math.h
 freertos1\my_chassis_control.o: ..\APP\CHASSIS_CONTROL_2.h
 freertos1\my_chassis_control.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 freertos1\my_chassis_control.o: ../Core/Inc/rng.h

@@ -569,9 +569,9 @@ if(0)
 
 			send_d_32[p++]=(220-ext_power_heat_data.data.chassis_power);//P_OUT		5
 			send_d_32[p++]=PITCH_EM_Speed_pid.I_Output;//I_OUT		6
-			send_d_32[p++]=VisionData.RawData.Pitch_Dir;//D_OUT  	7
+			send_d_32[p++]=M3508s[3].realSpeed;//D_OUT  	7
 	p=0;
-			send_d_16[p++]=0;//输出电压      8
+			send_d_16[p++]=CHASSIS_trage_speed_temp;//输出电压      8
 
 			send_d_16[p++]=CHASSIS_trage_speed;//fps       	9 				M3508s[3].
 			send_d_16[p++]=send_to_chassis;

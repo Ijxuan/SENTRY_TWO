@@ -3,7 +3,9 @@
 #include "main.h"
 //#include "user_can.h"		//二选一
 #include "BSP_CAN.h"		//二选一
+#include "RM_JudgeSystem.h"
 
+#define JS_SEND_ID 0x136
 
 #define DR16_SEND_PART_ONE 0x135
 #define DR16_SEND_PART_TWO 0x134
@@ -28,6 +30,7 @@
 //	uint8_t DR16_SEND[8];
 //}DR16_Send_u;
 //extern DR16_Send_u DR16_T;
+void JS_send_control(void);
 
 #if send_any_time==1
 //任何时候都会以固定频率发送

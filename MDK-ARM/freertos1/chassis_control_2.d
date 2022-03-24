@@ -51,6 +51,7 @@ freertos1\chassis_control_2.o: ../Core/Inc/can.h
 freertos1\chassis_control_2.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 freertos1\chassis_control_2.o: ..\Arithmetic\my_positionPID_bate.h
 freertos1\chassis_control_2.o: ..\APP\MY_CHASSIS_CONTROL.h
+freertos1\chassis_control_2.o: ..\Arithmetic\User_math.h
 freertos1\chassis_control_2.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 freertos1\chassis_control_2.o: ../Core/Inc/rng.h
 freertos1\chassis_control_2.o: ..\Device\RM_JudgeSystem.h

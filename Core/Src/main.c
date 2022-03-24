@@ -167,6 +167,16 @@ int CHASSIS_R_MIN=0;
 int ENCODER_L_MAX=510000;//编码器通过光电更新的最大值
 int ENCODER_R_MIN=0;	//编码器通过光电更新的最小值
 int ENCODER_M_MID=250000;//编码器通过光电更新的中间值
+int ENCODER_LONG=250000;//编码器通过光电更新的轨道长度
+int ENCODER_SPEED=250000;//这次的值
+int M3508_3ms_ago;//3毫秒以前的值
+int M3508_3ms_change;//3毫秒改变的值
+int M3508_3ms_ago_total_angle;//3毫秒以前的值
+int M3508_3ms_ago_speed;//3毫秒改变的值
+float M3508_speed_angle_kp;//角度与速度的关系
+float encoder_fbl_k=1.0;//分辨率的比例关系
+int ENCODER_ADD=0;//编码器这次的值减上次的值得到加速度
+
 
 int ENCODER_ARRIVE_MAX=0;//编码器抵达的最大值
 int ENCODER_ARRIVE_MIN=0;//编码器抵达的最小值
@@ -190,6 +200,8 @@ float Vision_RawData_Yaw_Angle=0;
 float Vision_RawData_Pitch_Angle=0;
 
 bool send_to_C;
+bool send_to_C_JS;
+
 int send_to_C_times;
 
 int CH_TOTAL=0;
@@ -199,6 +211,8 @@ bool stop_CH_OP_BC_END=0;
 int stop_CH_OP_BC_END_times=0;
 bool stop_CH_OP_BC_LESS=0;
 int stop_CH_OP_BC_LESS_times=0;
+int CHASSIS_trage_speed_temp;
+int JS_SEND_times=0;
 
 //driver  plate
 /* USER CODE END 0 */

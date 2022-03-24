@@ -111,8 +111,16 @@ extern float DEBUFF;
 extern int ENCODER_L_MAX;
 extern int ENCODER_R_MIN;
 extern int ENCODER_M_MID;
+extern int ENCODER_LONG;//编码器通过光电更新的轨道长度
+extern int M3508_3ms_ago;//3毫秒以前的值
+extern int M3508_3ms_change;//3毫秒改变的值
 extern short int speed_change_times;
-
+extern int ENCODER_ADD;//
+extern float encoder_fbl_k;//分辨率的比例关系
+extern int ENCODER_SPEED;//编码器这次的值减上次的值得到加速度
+extern int M3508_3ms_ago_total_angle;//3毫秒以前的值
+extern int M3508_3ms_ago_speed;//3毫秒改变的值
+extern float M3508_speed_angle_kp;//角度与速度的关系
 extern int ENCODER_ARRIVE_MAX;//编码器抵达的最大值
 extern int ENCODER_ARRIVE_MIN;//编码器抵达的最小值
 
@@ -126,6 +134,9 @@ extern int time_3_times;
 extern float Vision_RawData_Yaw_Angle;
 extern float Vision_RawData_Pitch_Angle;
 extern bool send_to_C;
+extern bool send_to_C_JS;
+extern int JS_SEND_times;
+
 extern int send_to_C_times;
 
 extern int CH_TOTAL;
@@ -136,6 +147,8 @@ extern bool stop_CH_OP_BC_END;
 extern int stop_CH_OP_BC_END_times;
 extern bool stop_CH_OP_BC_LESS;
 extern int stop_CH_OP_BC_LESS_times;
+extern int CHASSIS_trage_speed_temp;
+
 
 extern int uart_3_times;
 
